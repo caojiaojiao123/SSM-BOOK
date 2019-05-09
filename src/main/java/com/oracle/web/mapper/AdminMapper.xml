@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oracle.web.mapper.AdminMapper">
+  <resultMap id="BaseResultMap" type="com.oracle.web.bean.Admin">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="touxiang" jdbcType="VARCHAR" property="touxiang" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="repassword" jdbcType="VARCHAR" property="repassword" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from admin
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.oracle.web.bean.Admin">
+    insert into admin (id, name, touxiang, 
+      username, password, repassword, 
+      phone)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{touxiang,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{repassword,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.oracle.web.bean.Admin">
+    update admin
+    set name = #{name,jdbcType=VARCHAR},
+      touxiang = #{touxiang,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      repassword = #{repassword,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, name, touxiang, username, password, repassword, phone
+    from admin
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, name, touxiang, username, password, repassword, phone
+    from admin
+  </select>
+</mapper>
