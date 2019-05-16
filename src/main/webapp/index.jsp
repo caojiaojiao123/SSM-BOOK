@@ -14,7 +14,7 @@
 <body>
    <div class="container">
    <h1 align="center">图书管理系统</h1>
-   <center><img src="images/001.gif" width="600px" class="img-rounded" /></center>
+   <center><img src="images/001.jpg" width="600px" class="img-rounded" /></center>
    <hr width="600px">
    <p align="center">
      <a href="user/1" class="btn btn-primary">查看所有信息</a>
