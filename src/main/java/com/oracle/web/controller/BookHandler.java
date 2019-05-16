@@ -59,7 +59,7 @@ public class BookHandler {
 
 	public <SubBook> String addMonster(com.oracle.web.bean.SubBook book) {
 
-		int i = bookService.addBook( book);
+		int i = bookService.addBook(book);
 
 		if (i > 0) {
 
