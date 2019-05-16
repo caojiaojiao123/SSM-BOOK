@@ -1,6 +1,9 @@
 package com.oracle.web.mapper;
 
+
 import com.oracle.web.bean.Book;
+import com.oracle.web.bean.SubBook;
+
 import java.util.List;
 
 public interface BookMapper {
@@ -13,4 +16,5 @@ public interface BookMapper {
     List<Book> selectAll();
 
     int updateByPrimaryKey(Book record);
+	List<SubBook> showByPage();
 }
