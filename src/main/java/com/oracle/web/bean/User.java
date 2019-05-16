@@ -15,7 +15,23 @@ public class User {
 
     private String date;
 
-    public Integer getId() {
+    public User(Integer id, String name, String touxiang, String username, String password, String phone, String date) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.touxiang = touxiang;
+		this.username = username;
+		this.password = password;
+		this.phone = phone;
+		this.date = date;
+	}
+
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -70,4 +86,11 @@ public class User {
     public void setDate(String date) {
         this.date = date == null ? null : date.trim();
     }
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", touxiang=" + touxiang + ", username=" + username + ", password="
+				+ password + ", phone=" + phone + ", date=" + date + "]";
+	}
+    
 }

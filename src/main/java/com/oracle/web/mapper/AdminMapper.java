@@ -4,6 +4,7 @@ import com.oracle.web.bean.Admin;
 import java.util.List;
 
 public interface AdminMapper {
+	
     int deleteByPrimaryKey(Integer id);
 
     int insert(Admin record);
