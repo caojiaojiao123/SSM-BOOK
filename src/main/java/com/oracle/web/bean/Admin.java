@@ -1,6 +1,7 @@
 package com.oracle.web.bean;
 
 public class Admin {
+	
     private Integer id;
 
     private String name;
