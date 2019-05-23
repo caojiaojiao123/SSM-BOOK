@@ -41,4 +41,18 @@
     select id, name, touxiang, username, password, phone, date
     from user
   </select>
+  
+  <select id="selectCount" resultType="java.lang.Integer">
+  	SELECT COUNT(*) FROM user
+  </select>
+  
+   <select id="selectBypage" parameterType="int"  resultMap="BaseResultMap">
+  	select * from user  order by id desc limit #{index},5
+  	
+  </select>
+  
+  <select id="selectAllBypage" parameterType="int"  resultMap="BaseResultMap">
+    select * from user  order by id desc 
+   
+  </select>
 </mapper>

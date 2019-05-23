@@ -58,13 +58,15 @@
 			
 			<c:forEach items="${pb.beanList }" var="u" varStatus="s">
 			
+			<!--<c:forEach items="${pb.uList }" var="u" varStatus="s">-->
+			
 				<tr>
 				
 				<td>${s.index+1 }</td>
 				
 				<td>${u.name }</td>
 				
-				<td><img src="/img${u.touxiang }"/></td>
+				<td><img src="/images${u.touxiang }"/></td>
 				
 				<td>${u.username }</td>
 				
@@ -80,9 +82,9 @@
 				
 				<td><input type="checkbox" name="ids" value="${u.id }" /></td>
 				
-			    <td><a href="http://localhost/ssm_book/user/${u.id  }" class="deleteId btn btn-danger">删除</a></td>
+			    <td><a href="user/${u.id  }" class="deleteId btn btn-danger">删除</a></td>
 				
-				<td><a href="http://localhost/ssm_book/user/${u.id  }" class="btn btn-primary">修改</a></td>
+				<td><a href="user/${u.id  }" class="btn btn-primary">修改</a></td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -91,59 +93,64 @@
 		  <input type="hidden" name="_method" value="DELETE"/>
 		</form>
 		<hr>
-		<center>
-		<p>第${pb.pageNow }页/共${pb.pages }页
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<ul class="pagination">
-				<li><a href="1">首页</a></li>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<c:if test="${pb.pageNow>1 }">
-					<li><a href="${pb.pageNow-1 }">上一页</a></li>
-				</c:if>
-				<!-- 分两种情况		 
-		        1.如果页数小于10
-		        2.如果页数大于10 
-		-->
-				<c:choose>
-					<c:when test="${pb.pages<=10 }">
+				<center>
+		    <!-- 更改分页的样式=====》ul列表 -->
+		    <ul class="pager text-center" >
+			<li><a href="monsters?pageNow=1">首页</a> &nbsp;&nbsp;<li>
+			<c:if test="${pb.pageNow>1 }">
+				<li><a href="monsters?pageNow=${pb.pageNow-1 }">上一页</a><li>
+			</c:if>
+			&nbsp; 
+			<!-- 分两种情况：
+		         如果页数小于10：
+		         如果页数大于10：         
+		        -->
+			  <c:choose>
+				<c:when test="${pb.pages<=10 }">
+					<c:set var="begin" value="1"></c:set>
+					<c:set var="end" value="${pb.pages }"></c:set>
+				</c:when>
+				<c:otherwise>
+					<c:set var="begin" value="${pb.pageNow-5 }"></c:set>
+					<c:set var="end" value="${pb.pageNow+4 }"></c:set>
+					<c:if test="${begin<=1 }">
 						<c:set var="begin" value="1"></c:set>
+						<c:set var="end" value="10"></c:set>
+					</c:if>
+					<c:if test="${end>=pb.pages }">
+						<c:set var="begin" value="${pb.pages-9 }"></c:set>
 						<c:set var="end" value="${pb.pages }"></c:set>
+					</c:if>
+				</c:otherwise>
+			</c:choose> 
+			<!-- 循环十个数 -->
+		 <c:forEach begin="${begin }" end="${end }" var="i">
+				<c:choose>
+					<c:when test="${pb.pageNow==i }">
+						<span>${i}</span>
 					</c:when>
 					<c:otherwise>
-						<c:set var="begin" value="${pb.pageNow-5 }"></c:set>
-						<c:set var="end" value="${pb.pageNow+4 }"></c:set>
-						<c:if test="${begin<=1 }">
-							<c:set var="begin" value="1"></c:set>
-							<c:set var="end" value="10"></c:set>
-						</c:if>
-						<c:if test="${end>=pb.pages }">
-							<c:set var="begin" value="${pb.pageNow-9 }"></c:set>
-							<c:set var="end" value="${pb.pages }"></c:set>
-						</c:if>
+						<li><a href="monsters?pageNow=${i }">${i }</a></li>
 					</c:otherwise>
 				</c:choose>
-				<!-- 循环十个数 -->
-				<c:forEach begin="${begin }" end="${end }" var="i">
-					<c:choose>
-						<c:when test="${pb.pageNow==i }">
-							<li class="active"><span>${i }</span></li>
-						</c:when>
-						<c:otherwise>
-							<li><a href="${i }">${i }</a></li>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
 
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<c:if test="${pb.pageNow<pb.pages }">
-					<li><a href="${pb.pageNow+1 }">下一页</a></li>
-				</c:if>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<li><a href="${pb.pages }">尾页</a></li>
-			</ul>
-
+			</c:forEach>
+			&nbsp;
+			<c:if test="${pb.pageNow<pb.pages }">
+				<li><a href="monsters?pageNow=${pb.pageNow+1 }">下一页</a></li>
+			</c:if>
+			&nbsp;&nbsp; <li><a href="monsters?pageNow=${pb.pages }">尾页</a></li>
+           </ul>
 		</center>
-		<p align="center"><a href="http://localhost/ssm_crud/addUI">点击添加妖怪</a></p>
-	</div>
+		<p align="center">第${pb.pageNow }页/共${pb.pages }页</p>
+		<br>
+    
+        
+        <br>
+
+		<p align="center">
+			<a href="addUser.jsp" class="btn btn-primary">添加用户</a>
+		</p>
+		</div>
 </body>
 </html>
