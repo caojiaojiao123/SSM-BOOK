@@ -44,14 +44,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public void update(User user) {
-		// TODO Auto-generated method stub
-		
-		this.userMapper.updateByPrimaryKey(user);
-	}
-
-	@Override
-	@Transactional
 	public PageBean<User> selectByPage(Integer pageNow, int pageSize) {
 		
 		PageBean<User> pb = new PageBean<User>();
@@ -95,6 +87,21 @@ public class UserServiceImpl implements UserService {
 		pb.setPageSize(5);
 		
 		return pb;
+	}
+
+	@Override
+	@Transactional
+	public User queryOneUser(Integer id) {
+		// TODO Auto-generated method stub
+		return this.userMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	@Transactional
+	public void update(User user) {
+		// TODO Auto-generated method stub
+		
+		this.userMapper.updateByPrimaryKey(user);
 	}
 
 }

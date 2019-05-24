@@ -19,6 +19,6 @@ public interface UserService {
 
 	PageBean<User> selectByPage(Integer pageNow, int pageSize);
 
-	//User queryOneUser(Integer id);
+	User queryOneUser(Integer id);
 
 }
