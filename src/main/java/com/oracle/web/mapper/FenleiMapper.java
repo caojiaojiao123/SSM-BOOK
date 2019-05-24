@@ -9,8 +9,11 @@ public interface FenleiMapper {
     int insert(Fenlei record);
 
     Fenlei selectByPrimaryKey(Integer id);
+    
 
     List<Fenlei> selectAll();
 
     int updateByPrimaryKey(Fenlei record);
-}
+    
+    
+ }
