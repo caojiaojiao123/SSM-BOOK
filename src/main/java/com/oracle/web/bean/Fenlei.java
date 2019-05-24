@@ -17,7 +17,12 @@ public class Fenlei {
         return name;
     }
 
-    public void setName(String name) {
+    @Override
+	public String toString() {
+		return "Fenlei [id=" + id + ", name=" + name + "]";
+	}
+
+	public void setName(String name) {
         this.name = name == null ? null : name.trim();
     }
 }

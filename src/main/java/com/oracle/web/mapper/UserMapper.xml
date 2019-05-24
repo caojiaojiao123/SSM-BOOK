@@ -41,4 +41,5 @@
     select id, name, touxiang, username, password, phone, date
     from user
   </select>
+  
 </mapper>

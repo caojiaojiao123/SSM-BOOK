@@ -23,11 +23,11 @@
 		<br> <br>
 		<form action="addBook" method="post" class="form-horizontal">
 			<div class="form-group">
-				<label for="schoolName" class="col-sm-4 control-label">分类名称</label>
+				<label for="fid" class="col-sm-4 control-label">分类名称</label>
 				<div class="col-sm-4">
-					<select name="fenlei.id" class="form-control">
+					<select name="fid" class="form-control">
 						<c:forEach items="${sList }" var="s">
-							<option value="${s.id }" >${s.name }</option>
+							<option value="${s.id }">${s.name }</option>
 						</c:forEach>
 					</select>
 				</div>

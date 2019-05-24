@@ -55,9 +55,11 @@ public class BookHandler {
 
 	}
 
-	@RequestMapping(value = "/addBook", method = RequestMethod.POST)
+	@RequestMapping(value = "/addBook",method = RequestMethod.POST)
 
-	public <SubBook> String addMonster(com.oracle.web.bean.SubBook book) {
+	public String addBook(SubBook book) {
+		
+		System.out.println(book);
 
 		int i = bookService.addBook(book);
 
@@ -85,22 +87,19 @@ public class BookHandler {
 
 		Book book = bookService.QueryOneBook(id);// 单查出来一本书：
 
-		// System.out.println(monster.getMonstername()+" "+monster.getEmail()+"
-		// "+monster.getBrithday()+" "+monster.getEntryday());
-
 		session.setAttribute("m", book);
-
+		
 		List<Fenlei> list = fenleiService.list();
-
-		session.setAttribute("sList", list);
+		
+		session.setAttribute("sLis", list);
 
 		return "redirect:/updateBook.jsp";
 	}
 
 	@RequestMapping(value = "/updateBook", method = RequestMethod.PUT) // 真正的修改：
-	public <SubBook> String updateBook(SubBook book) {
+	public String updateBook(SubBook book) {
 
-		bookService.updateBook((com.oracle.web.bean.SubBook) book);
+		bookService.updateBook(book);
 
 		return "redirect:/showByPage";
 

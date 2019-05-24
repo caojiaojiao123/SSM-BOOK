@@ -14,7 +14,6 @@ import com.oracle.web.service.FenleiService;
 public class FenleiServicelmpl implements FenleiService {
 	
 	@Autowired
-	
 	private FenleiMapper fenleiMapper;
 
 	@Override

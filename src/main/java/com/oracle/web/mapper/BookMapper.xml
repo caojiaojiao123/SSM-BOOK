@@ -1,77 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.oracle.web.mapper.BookMapper">
-  <resultMap id="BaseResultMap" type="Book">
-    <id column="b_id" jdbcType="INTEGER" property="id"/>
-    <result column="flname" jdbcType="VARCHAR" property="flname" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="price" jdbcType="VARCHAR" property="price" />
-    <result column="chubanshe" jdbcType="VARCHAR" property="chubanshe" />
-    <result column="zhuangtai" jdbcType="VARCHAR" property="zhuangtai" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="f_id" jdbcType="INTEGER" property="fid" />
-  </resultMap>
+	<resultMap id="BaseResultMap" type="com.oracle.web.bean.Book">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="price" jdbcType="VARCHAR" property="price" />
+		<result column="chubanshe" jdbcType="VARCHAR" property="chubanshe" />
+		<result column="zhuangtai" jdbcType="VARCHAR" property="zhuangtai" />
+		<result column="username" jdbcType="VARCHAR" property="username" />
+		<result column="fid" jdbcType="INTEGER" property="fid" />
+	</resultMap>
   
-   <resultMap id="SubBookResultMap" type="SubBook">
-    <id column="b_id" jdbcType="INTEGER" property="id"/>
-    <result column="flname" jdbcType="VARCHAR" property="flname" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="price" jdbcType="VARCHAR" property="price" />
-    <result column="chubanshe" jdbcType="VARCHAR" property="chubanshe" />
-    <result column="zhuangtai" jdbcType="VARCHAR" property="zhuangtai" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="f_id" jdbcType="INTEGER" property="fid" />
-    
-   <association property="fenlei" javaType="Fenlei">
-    	<id property="id" column="fid"/>
-    	<result property="name" column="name"/>
-    	
-    </association> 
-  </resultMap>
-  
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+	<resultMap id="SubBookResultMap" type="SubBook">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="price" jdbcType="VARCHAR" property="price" />
+		<result column="chubanshe" jdbcType="VARCHAR" property="chubanshe" />
+		<result column="zhuangtai" jdbcType="VARCHAR" property="zhuangtai" />
+		<result column="username" jdbcType="VARCHAR" property="username" />
+		<result column="fid" jdbcType="INTEGER" property="fid" />
+		<association javaType="Fenlei" property="fenlei">
+			<id column="id" property="id"/>
+			<result column="name" property="name"/>
+		</association> 
+	</resultMap>
+ 
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from book
     where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.oracle.web.bean.Book">
-    insert into book (id, flname, name, 
-      price, chubanshe, zhuangtai, 
-      username, fid)
-    values (#{id,jdbcType=INTEGER}, #{flname,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{price,jdbcType=VARCHAR}, #{chubanshe,jdbcType=VARCHAR}, #{zhuangtai,jdbcType=VARCHAR}, 
-      #{username,jdbcType=VARCHAR}, #{fid,jdbcType=INTEGER})
-  </insert>
-  <update id="updateByPrimaryKey" parameterType="com.oracle.web.bean.Book">
+	</delete>
+	<insert id="insert" parameterType="com.oracle.web.bean.SubBook">
+    insert into book (id, name, price, 
+      chubanshe, zhuangtai, username, 
+      fid)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, 
+      #{chubanshe,jdbcType=VARCHAR}, #{zhuangtai,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{fid,jdbcType=INTEGER})
+	</insert>
+	<update id="updateByPrimaryKey" parameterType="com.oracle.web.bean.SubBook">
     update book
-    set flname = #{flname,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
+    set name = #{name,jdbcType=VARCHAR},
       price = #{price,jdbcType=VARCHAR},
       chubanshe = #{chubanshe,jdbcType=VARCHAR},
       zhuangtai = #{zhuangtai,jdbcType=VARCHAR},
       username = #{username,jdbcType=VARCHAR},
-      fid = #{fid,jdbcType=INTEGER}
+      fid = #{fenlei.id,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
-  </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, flname, name, price, chubanshe, zhuangtai, username, fid
+	</update>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="SubBookResultMap">
+    select id, name, price, chubanshe, zhuangtai, username, fid
     from book
     where id = #{id,jdbcType=INTEGER}
-  </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, flname, name, price, chubanshe, zhuangtai, username, fid
-    from book
-  </select>
-  <!--查看有多少条
-  	<select id="selectCount" resultType="java.lang.Integer">
-    SELECT COUNT(*) FROM Monster
-  </select>
-  -->
-  <!--分页
-   <select id="showByPage" parameterType="int" resultMap="SubMonsterResultMap">
-    select * from monster,school where monster.school_fk= school.school_id order by monster_id desc limit #{index},8
-  </select>
-  -->
-  <select id="showByPage" resultMap="SubBookResultMap">
+	</select>
+	<select id="selectAll" resultMap="SubBookResultMap">
+    select * from book,fenlei  where book.fid= fenlei.id
+ 
+	</select>
+	
+	<!--查看有多少条
+			&lt;select id="selectCount" resultType="java.lang.Integer"&gt;
+			SELECT COUNT(*) FROM Monster
+		  &lt;/select&gt;
+		  -->
+	<!--分页
+		   &lt;select id="showByPage" parameterType="int" resultMap="SubMonsterResultMap"&gt;
+			select * from monster,school where monster.school_fk= school.school_id order by monster_id desc limit #{index},8
+		  &lt;/select&gt;
+		  -->
+	<select id="showByPage" resultMap="SubBookResultMap">
     select * from book,fenlei where book.fid= fenlei.id ORDER BY book.id DESC
-  </select>
+	</select>
 </mapper>

@@ -65,11 +65,10 @@
 					<td>${m.chubanshe}</td>
 					<td>${m.zhuangtai}</td>
 					<td>${m.username}</td>
-			
 					<td>${m.fenlei.name}</td>
 					<td><a href="deleteBook/${m.id}"
 						class="deleteId  btn btn-danger">删除</a></td>
-					<td><a href="updateBook/${m.id}" class="btn btn-primary">修改</a></td>
+					<td><a href="updateUI/${m.id}" class="btn btn-primary">修改</a></td>
 				</tr>
 			</c:forEach>
 		</table>

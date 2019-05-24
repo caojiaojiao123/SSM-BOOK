@@ -29,12 +29,14 @@ public class BookServicelmpl implements BookService {// 类继承接口：
 		pageBean<SubBook> pb = new pageBean<SubBook>();
 
 		// 当前页的数据
-		PageHelper.startPage(pageNow, 8);
+		PageHelper.startPage(pageNow, 5);
 
 		// 已经是分页好的数据了
 		List<SubBook> list = this.bookMapper.showByPage();
 
 		pb.setBeanList(list);
+		
+		System.out.println(list);
 
 		// 总记录数
 		PageInfo<SubBook> pi = new PageInfo<SubBook>(list);
@@ -45,7 +47,7 @@ public class BookServicelmpl implements BookService {// 类继承接口：
 		pb.setPageNow(pageNow);
 
 		// 每页有多少条
-		pb.setpageSize(8);
+		pb.setpageSize(5);
 
 		return pb;
 	}
@@ -70,7 +72,7 @@ public class BookServicelmpl implements BookService {// 类继承接口：
 	@Transactional(readOnly = true)
 	public SubBook QueryOneBook(Integer id) {
 		// TODO Auto-generated method stub
-		return (SubBook) this.bookMapper.selectByPrimaryKey(id);
+		return   this.bookMapper.selectByPrimaryKey(id);
 	}
 
 	@Override

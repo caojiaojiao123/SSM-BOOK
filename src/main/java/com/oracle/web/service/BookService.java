@@ -12,7 +12,7 @@ public interface BookService {
 
 	pageBean<SubBook> showByPage(Integer pageNow);
 
-	int addBook(SubBook book);
+
 
 	void deleteBook(Integer id);
 
@@ -20,6 +20,17 @@ public interface BookService {
 
 	void updateBook(SubBook book);
 
+
+
+	
+
+
+
+	int addBook(SubBook book);
+
+	//int addBook(SubBook book);
+
+	
 	
 
 }

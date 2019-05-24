@@ -27,4 +27,5 @@
     select id, name
     from fenlei
   </select>
+ 
 </mapper>

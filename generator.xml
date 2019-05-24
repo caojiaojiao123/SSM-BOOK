@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+	  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+	  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+	<!-- 上下文环境 -->
+
+	<context id="MySQLTable" targetRuntime="MyBatis3Simple">
+    
+		<!-- 关闭自动生成的注释 -->
+    
+		<commentGenerator>
+    
+			<property name="suppressAllComments" value="true" />
+    
+		</commentGenerator>
+  
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			
+			connectionURL="jdbc:mysql://localhost:3306/manager"
+			
+			userId="root"
+			
+			password="123456789">
+                    
+		</jdbcConnection>
+    
+		<!-- 转换器 -->
+
+		<javaTypeResolver >
+    
+			<property name="forceBigDecimals" value="false" />
+    
+		</javaTypeResolver>
+    
+		<!-- 生成的JavaBean放在哪个包下 -->
+    
+		<javaModelGenerator targetPackage="com.oracle.web.bean" targetProject=".\src\main\java">
+    
+			<property name="enableSubPackages" value="true" />
+    
+			<property name="trimStrings" value="true" />
+    
+		</javaModelGenerator>
+    
+		<!-- 映射文件生成的位置 -->
+    
+		<sqlMapGenerator targetPackage="com.oracle.web.mapper"  targetProject=".\src\main\java">
+    
+			<property name="enableSubPackages" value="true" />
+      
+		</sqlMapGenerator>
+    
+		<!-- 生成mapper接口的位置 -->
+    
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.oracle.web.mapper"  targetProject=".\src\main\java">
+    
+			<property name="enableSubPackages" value="true" />
+    
+		</javaClientGenerator>
+   
+		<!-- 表和JavaBean之间的对应关系 -->
+    
+		<table tableName="admin" domainObjectName="Admin"></table>
+    
+		<table tableName="book" domainObjectName="Book" ></table>
+    
+		<table tableName="fenlei" domainObjectName="Fenlei"></table>
+    
+		<table tableName="user" domainObjectName="User"></table>
+   
+	</context>
+    
+</generatorConfiguration>

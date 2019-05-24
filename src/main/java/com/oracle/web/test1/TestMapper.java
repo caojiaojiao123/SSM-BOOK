@@ -1,4 +1,4 @@
-package com.oracle.web.test;
+package com.oracle.web.test1;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.oracle.web.bean.Book;
+import com.oracle.web.bean.SubBook;
 import com.oracle.web.mapper.BookMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)//用的是spring的测试：
@@ -22,7 +23,7 @@ private BookMapper bookMapper;
 public void testPage(){
 	
 //	this.bookMapper.insert(record)
-	List<Book> selectAll = this.bookMapper.selectAll();
+	List<SubBook> selectAll = this.bookMapper.selectAll();
 	for (Book book : selectAll) {
 		System.out.println(book);
 	}

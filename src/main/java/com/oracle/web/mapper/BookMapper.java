@@ -1,20 +1,21 @@
 package com.oracle.web.mapper;
 
-
 import com.oracle.web.bean.Book;
 import com.oracle.web.bean.SubBook;
 
 import java.util.List;
 
 public interface BookMapper {
-    int deleteByPrimaryKey(Integer id);
+	int deleteByPrimaryKey(Integer id);
 
-    int insert(Book record);
+	int insert(SubBook record);
 
-    Book selectByPrimaryKey(Integer id);
+	SubBook selectByPrimaryKey(Integer id);
 
-    List<Book> selectAll();
+	List<SubBook> selectAll();
 
-    int updateByPrimaryKey(Book record);
+
+	int updateByPrimaryKey(Book record);
+
 	List<SubBook> showByPage();
 }

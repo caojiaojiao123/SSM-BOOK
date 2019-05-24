@@ -29,14 +29,14 @@
 			<input type="hidden" name="_method" value="PUT">
 			<input type="hidden" name="id"  value="${m.id }">
 			<div class="form-group">
-				<label for="schoolName" class="col-sm-4 control-label">分类名称</label>
+				<label for="fenlei.name" class="col-sm-4 control-label">分类名称</label>
 				<div class="col-sm-4">
-					<select name="fenlei.id" class="form-control">
-						<c:forEach items="${sList }" var="s">
-							<c:if test="${s.id==s.fenlei.id}">
+					<select name="fid" class="form-control">
+						<c:forEach  items="${sLis}" var="s">
+							<c:if test="${s.id==m.fid}">
 								<option value="${s.id}" selected="selected">${s.name }</option>
 							</c:if>		
-							<c:if test="${s.id!=m.fenlei.id}">
+							<c:if test="${s.id==m.fid}">
 								<option value="${s.id }">${s.name }</option>
 							</c:if>
 						</c:forEach>	
@@ -64,9 +64,9 @@
 				</div>
 			</div>	
 			<div class="form-group">
-				<label for="zhuangtai " class="col-sm-4 control-label">状态</label>
+				<label for="zhuangtai" class="col-sm-4 control-label">状态</label>
 				<div class="col-sm-4">
-					<input type="text" class="form-control" id="zhuangtai " name="zhuangtai "  value="${m.zhuangtai }">
+					<input type="text" class="form-control" id="zhuangtai" name="zhuangtai"  value="${m.zhuangtai}">
 				</div>
 			</div>
 			

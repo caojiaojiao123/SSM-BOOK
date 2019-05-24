@@ -1,11 +1,7 @@
 package com.oracle.web.bean;
 
-import java.io.Serializable;
-
-public class Book implements Serializable{
+public class Book {
     private Integer id;
-
-    private String flname;
 
     private String name;
 
@@ -19,20 +15,35 @@ public class Book implements Serializable{
 
     private Integer fid;
 
-    public Integer getId() {
+    @Override
+	public String toString() {
+		return "Book [id=" + id + ", name=" + name + ", price=" + price + ", chubanshe=" + chubanshe + ", zhuangtai="
+				+ zhuangtai + ", username=" + username + ", fid=" + fid + "]";
+	}
+
+	public Book() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Book(Integer id, String name, String price, String chubanshe, String zhuangtai, String username,
+			Integer fid) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.price = price;
+		this.chubanshe = chubanshe;
+		this.zhuangtai = zhuangtai;
+		this.username = username;
+		this.fid = fid;
+	}
+
+	public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getFlname() {
-        return flname;
-    }
-
-    public void setFlname(String flname) {
-        this.flname = flname == null ? null : flname.trim();
     }
 
     public String getName() {
