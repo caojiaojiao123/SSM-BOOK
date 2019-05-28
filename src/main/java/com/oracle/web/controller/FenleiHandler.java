@@ -19,8 +19,6 @@ import com.oracle.web.bean.Fenlei;
 @Controller
 public class FenleiHandler {
 	
-	
-	
 	@Autowired
 	private FenleiService fenleiService;
 	
