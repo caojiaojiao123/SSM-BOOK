@@ -7,19 +7,24 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.oracle.web.bean.Fenlei;
+import com.oracle.web.bean.FenleiExample;
 import com.oracle.web.mapper.FenleiMapper;
 import com.oracle.web.service.FenleiService;
 
 @Service
-public class FenleiServicelmpl implements FenleiService {
-	
+public class FenleiServiceImpl implements FenleiService {
+
 	@Autowired
 	private FenleiMapper fenleiMapper;
-
+	
 	@Override
 	@Transactional
-	public List<Fenlei> list() {
+	public List<Fenlei> selectFenleiAll() {
 		// TODO Auto-generated method stub
-		return this.fenleiMapper.selectAll();
+		 FenleiExample example=new FenleiExample();
+		return this.fenleiMapper.selectByExample(example);
 	}
+
+	
+
 }

@@ -13,32 +13,11 @@ public class Book {
 
     private String username;
 
-    private Integer fid;
+    private Integer kucun;
 
-    @Override
-	public String toString() {
-		return "Book [id=" + id + ", name=" + name + ", price=" + price + ", chubanshe=" + chubanshe + ", zhuangtai="
-				+ zhuangtai + ", username=" + username + ", fid=" + fid + "]";
-	}
+    private Integer f_id;
 
-	public Book() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Book(Integer id, String name, String price, String chubanshe, String zhuangtai, String username,
-			Integer fid) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.price = price;
-		this.chubanshe = chubanshe;
-		this.zhuangtai = zhuangtai;
-		this.username = username;
-		this.fid = fid;
-	}
-
-	public Integer getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -86,11 +65,26 @@ public class Book {
         this.username = username == null ? null : username.trim();
     }
 
-    public Integer getFid() {
-        return fid;
+    public Integer getKucun() {
+        return kucun;
     }
 
-    public void setFid(Integer fid) {
-        this.fid = fid;
+    public void setKucun(Integer kucun) {
+        this.kucun = kucun;
     }
+
+	public Integer getF_id() {
+		return f_id;
+	}
+
+	public void setF_id(Integer f_id) {
+		this.f_id = f_id;
+	}
+
+	public Book() {
+		super();
+		this.f_id = f_id;
+	}
+
+   
 }

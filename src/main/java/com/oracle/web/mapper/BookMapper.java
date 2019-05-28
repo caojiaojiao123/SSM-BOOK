@@ -1,21 +1,35 @@
 package com.oracle.web.mapper;
 
 import com.oracle.web.bean.Book;
-import com.oracle.web.bean.SubBook;
-
+import com.oracle.web.bean.BookAndFenlei;
+import com.oracle.web.bean.BookExample;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface BookMapper {
-	int deleteByPrimaryKey(Integer id);
+    long countByExample(BookExample example);
 
-	int insert(SubBook record);
+    int deleteByExample(BookExample example);
 
-	SubBook selectByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer id);
 
-	List<SubBook> selectAll();
+    int insert(Book record);
 
+    int insertSelective(Book record);
 
-	int updateByPrimaryKey(Book record);
+    List<Book> selectByExample(BookExample example);
 
-	List<SubBook> showByPage();
+    Book selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") Book record, @Param("example") BookExample example);
+
+    int updateByExample(@Param("record") Book record, @Param("example") BookExample example);
+
+    int updateByPrimaryKeySelective(Book record);
+
+    int updateByPrimaryKey(Book record);
+
+	List<BookAndFenlei> selectBookAll();
+
+	List<BookAndFenlei> selectByGji(Book book);
 }

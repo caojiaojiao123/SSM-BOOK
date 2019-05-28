@@ -23,9 +23,9 @@ private BookMapper bookMapper;
 public void testPage(){
 	
 //	this.bookMapper.insert(record)
-	List<SubBook> selectAll = this.bookMapper.selectAll();
-	for (Book book : selectAll) {
-		System.out.println(book);
-	}
+//	List<SubBook> selectAll = this.bookMapper.selectAll();
+//	for (Book book : selectAll) {
+//		System.out.println(book);
+//	}
 }
 }

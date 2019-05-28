@@ -7,7 +7,7 @@
 
 	<!-- 上下文环境 -->
 
-	<context id="MySQLTable" targetRuntime="MyBatis3Simple">
+	<context id="MySQLTable" targetRuntime="MyBatis3">
     
 		<!-- 关闭自动生成的注释 -->
     
@@ -63,13 +63,13 @@
    
 		<!-- 表和JavaBean之间的对应关系 -->
     
-		<table tableName="admin" domainObjectName="Admin"></table>
+		
     
 		<table tableName="book" domainObjectName="Book" ></table>
     
 		<table tableName="fenlei" domainObjectName="Fenlei"></table>
     
-		<table tableName="user" domainObjectName="User"></table>
+		
    
 	</context>
     

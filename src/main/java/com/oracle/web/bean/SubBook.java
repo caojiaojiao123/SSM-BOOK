@@ -19,6 +19,11 @@ public class SubBook extends Book implements Serializable{
 		this.fenlei = fenlei;
 	}
 	
+	public String toString() {
+		return "Book [id=" + this.getId() + ", name=" + this.getName() + ", price=" + this.getPrice() + ", chubanshe=" +this.getChubanshe()+ ", zhuangtai="
+				+ this.getZhuangtai() + ", username=" + this.getUsername() + ", f_id=" + this.getF_id() +"fenlei="+fenlei+ "]";
+	}
+	
 	
 
 }
