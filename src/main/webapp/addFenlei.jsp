@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 
 <html>
-
+  
 <head>
 
 <!-- 要使用Bootscript的话，必须是html5文档 -->
@@ -101,6 +101,8 @@ function validatename() {
 					span.focus();
 					
 					flag = false;
+					
+				   
 
 				}
 
@@ -128,7 +130,7 @@ width:500px;
 
 <body background=".\imgs\001.jpg">
 
-	<form action="FenLeiServlet?action=addFenlei" method="post" name="addFenlei">
+	<form action="fenlei" method="post" >
 
 		<table class="table table-striped table-hover" align="center">
 
@@ -142,11 +144,12 @@ width:500px;
 				
 				<td><span id="nameMsg"></span></td>
 				
+				  
 			</tr>
 
 			<tr align="center">
 			
-				<td colspan="3"><button class="btn btn-info">添加</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-info">重填</button></td>
+				<td colspan="3"><button type="submit" class="btn btn-info">添加</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-info">重填</button></td>
 			</tr>
 
 		</table>

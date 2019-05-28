@@ -20,6 +20,7 @@ import com.oracle.web.bean.Fenlei;
 public class FenleiHandler {
 	
 	
+	
 	@Autowired
 	private FenleiService fenleiService;
 	
@@ -32,6 +33,10 @@ public class FenleiHandler {
 		request.setAttribute("fList", fList);
 
 		return "showFenlei";
+		
+		
+	    
+		
 	}
 	
 //	@RequestMapping(value = "/addUI",method = RequestMethod.GET)
@@ -43,13 +48,14 @@ public class FenleiHandler {
 //		request.setAttribute("fList", list);
 //		
 //		return "addFenlei";
+	
 //			
 //	}
 	
-	@RequestMapping(value = "add",method = RequestMethod.POST)
+	@RequestMapping(value = "fenlei",method = RequestMethod.POST)
 	public String add(Fenlei fenlei){
 		
-		int i = fenleiService.save(fenlei);
+		fenleiService.save(fenlei);
 		
 		return "redirect:/fenlei";
 			
@@ -65,6 +71,9 @@ public class FenleiHandler {
 		int i = fenleiService.delete(fenlei);
 		
 		return "redirect:/fenlei";
+		
+		
+		
 		
 		
 	}
@@ -87,6 +96,7 @@ public class FenleiHandler {
 		fenleiService.update(fenlei);
 
 		return "redirect:/fenlei";
+		
 	}
 
 	

@@ -70,7 +70,7 @@ width:250px;
 		      
 		   <li><a href="addFenlei.jsp" target="right"><span class="ui-icon ui-icon-plus"></span>添加分类</a></li>
 		   
-		   <li><a href="FenLeiServlet?action=showFenleiByPage" target="right"><span class="ui-icon ui-icon-folder-open"></span>查看分类</a></li>
+		   <li><a href="fenlei" target="right"><span class="ui-icon ui-icon-folder-open"></span>查看分类</a></li>
 		   
 		   <li><a href="changeFenlei.jsp" target="right"><span class="ui-icon ui-icon-tag"></span>修改分类</a></li>
 		
@@ -101,7 +101,7 @@ width:250px;
 		</div>
 		
 		<h3>管理员管理</h3>
-		
+		 
 		<div>
 		
 		   <li><a href="showAdmin.jsp" target="right"><span class="ui-icon ui-icon-locked"></span>查看管理员</a></li>
@@ -110,6 +110,7 @@ width:250px;
 		   
 		   <li><a href="AdminServlet?action=exitSystem" target="_parent"><span class="ui-icon ui-icon-power"></span>退出系统</a></li>
 		   	   
+		    	   
 		</div>
 	
 	</div>
