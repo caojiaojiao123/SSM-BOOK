@@ -11,11 +11,11 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 </head>
-<body>
+<body background=".\imgs\001.jpg">
    <div class="container">
    <h1 align="center">图书管理系统-----添加用户信息</h1>
    <hr width="1000px">
-   <form action="user" class="form-horizontal" method="post">
+   <form action="user" class="form-horizontal" method="post" enctype="multipart/form-data">
   
   <div class="form-group">
     <label for="name" class="col-sm-4 control-label">姓名</label>

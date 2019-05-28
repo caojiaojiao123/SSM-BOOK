@@ -99,13 +99,13 @@ public class UserHandler {
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	public String add(User user,MultipartFile touxiang) throws IllegalStateException, IOException {
 		
-		File file = new File("upload");
+		File file = new File("E:\\"+touxiang.getOriginalFilename());
 		
 		touxiang.transferTo(file);
 		
-		String path=touxiang.getOriginalFilename();
+		//String path=touxiang.getOriginalFilename();
 		
-		String valPath="upload"+path;
+		//String valPath="upload"+path;
 
 		userService.save(user);
 
