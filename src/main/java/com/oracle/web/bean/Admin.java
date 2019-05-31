@@ -15,65 +15,80 @@ public class Admin {
     private String repassword;
 
     private String phone;
+    
+    private String sex;
 
-    public Integer getId() {
-        return id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getTouxiang() {
-        return touxiang;
-    }
+	public String getTouxiang() {
+		return touxiang;
+	}
 
-    public void setTouxiang(String touxiang) {
-        this.touxiang = touxiang == null ? null : touxiang.trim();
-    }
+	public void setTouxiang(String touxiang) {
+		this.touxiang = touxiang;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public String getRepassword() {
-        return repassword;
-    }
+	public String getRepassword() {
+		return repassword;
+	}
 
-    public void setRepassword(String repassword) {
-        this.repassword = repassword == null ? null : repassword.trim();
-    }
+	public void setRepassword(String repassword) {
+		this.repassword = repassword;
+	}
 
-    public String getPhone() {
-        return phone;
-    }
+	public String getPhone() {
+		return phone;
+	}
 
-    public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
-    }
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public Admin() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public Admin(Integer id, String name, String touxiang, String username, String password, String repassword,
-			String phone) {
+			String phone, String sex) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -82,12 +97,15 @@ public class Admin {
 		this.password = password;
 		this.repassword = repassword;
 		this.phone = phone;
+		this.sex = sex;
 	}
 
-	public Admin() {
-		super();
-		// TODO Auto-generated constructor stub
+	@Override
+	public String toString() {
+		return "Admin [id=" + id + ", name=" + name + ", touxiang=" + touxiang + ", username=" + username
+				+ ", password=" + password + ", repassword=" + repassword + ", phone=" + phone + ", sex=" + sex + "]";
 	}
-    
+
+  
     
 }
