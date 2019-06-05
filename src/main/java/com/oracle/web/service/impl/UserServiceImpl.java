@@ -104,4 +104,11 @@ public class UserServiceImpl implements UserService {
 		this.userMapper.updateByPrimaryKey(user);
 	}
 
+	@Override
+	public List<User> showUserByIds(String[] arr) {
+		// TODO Auto-generated method stub
+		
+		return userMapper.showUserById(arr);
+	}
+
 }

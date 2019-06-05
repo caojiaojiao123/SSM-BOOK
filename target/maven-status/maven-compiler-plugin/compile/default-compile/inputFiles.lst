@@ -12,6 +12,7 @@ E:\mvn_workspace\ssm_book\src\main\java\com\oracle\web\service\UserService.java
 E:\mvn_workspace\ssm_book\src\main\java\com\oracle\web\mapper\FenleiMapper.java
 E:\mvn_workspace\ssm_book\src\main\java\com\oracle\web\service\impl\UserServiceImpl.java
 E:\mvn_workspace\ssm_book\src\main\java\com\oracle\web\service\impl\FenleiServiceImpl.java
+E:\mvn_workspace\ssm_book\src\main\java\com\oracle\utils\DownUtils.java
 E:\mvn_workspace\ssm_book\src\main\java\com\oracle\web\controller\BookHandler.java
 E:\mvn_workspace\ssm_book\src\main\java\com\oracle\web\mapper\BookMapper.java
 E:\mvn_workspace\ssm_book\src\main\java\com\oracle\web\mapper\AdminMapper.java

@@ -55,4 +55,15 @@
     select * from user  order by id desc 
    
   </select>
+  
+  <select id="showUserById" parameterType="java.lang.String" resultMap="BaseResultMap">
+   
+    <foreach item="arr" collection="array" index="no" open="(" separator="," close=")">
+    
+    #{arr}
+	
+	</foreach>
+  
+  </select>
+  
 </mapper>

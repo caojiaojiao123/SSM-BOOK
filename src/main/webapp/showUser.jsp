@@ -23,6 +23,7 @@
 $(function() {
 	
 	$(".deleteId").click(function() {
+		
 		var $url = this.href;
 
 		$("#deleteForm").attr("action", $url);
@@ -34,200 +35,226 @@ $(function() {
 		return false;
 	});
 });
+
 </script>
 
-<script type="text/javascript">
-
+<script>
+   
 window.onload=function(){
-	
-	var selectall=document.getElementById("selectall");
-	
-	selectall.onclick=function(){
-		
-		var chek=document.getElementsByName("ids");
-		
-		for(var i=0;i<chek.length;i++){
+
+	var selectAll=document.getElementById("selectAll");
 			
-			chek[i].checked=true; 
-			
-		}
-	}
-		
-		var noselect=document.getElementById("noselect");
-		
-		noselect.onclick=function(){
-			
-			var chek=document.getElementsByName("ids");
-			
-			for(var i=0;i<chek.length;i++){
+			selectAll.onclick=function(){
 				
-				chek[i].checked=false;
+				var chek=document.getElementsByName("ids");
 				
-			}
-		
-		}
-			
-		var fanxuan=document.getElementById("fanxuan");
-		
-		fanxuan.onclick=function(){
-			
-			var chek=document.getElementsByName("ids");
-			
-			for(var i=0;i<chek.length;i++){
-				
-				if(chek[i].checked==true){
-					
-					chek[i].checked=false;
-					
-				}
-				else{
+				for(var i=0;i<chek.length;i++){
 					
 					chek[i].checked=true;
+				};
+				
+			};
+			
+			var noselectAll=document.getElementById("noselectAll");
+			
+			noselectAll.onclick=function(){
+				
+			      	var chek=document.getElementsByName("ids");
+					
+					for(var i=0;i<chek.length;i++){
+						
+						chek[i].checked=false;
+					}
+			};
+			
+			var fanxuan=document.getElementById("fanxuan");
+			
+			fanxuan.onclick=function(){
+				
+				var chek=document.getElementsByName("ids");
+				
+				for(var i=0;i<chek.length;i++){
+					
+					if(chek[i].checked==true){
+						
+						chek[i].checked=false;
+					}else{
+						
+						chek[i].checked=true;
+					}
+				}
+			};
+		
+			/* var deleteStudent=document.getElementById("deleteStudent");
+			var chek=document.getElementsByName("ids");
+			deleteStudent.onclick=function(){
+				
+				var flag=false;
+				
+				for(var i=0;i<chek.length;i++){
+					
+					if(chek[i].checked==true){
+						
+						flag=true;
+						
+						break;
+					}
+				}
+				
+				if(flag==false){
+					
+					alert("请至少勾选一个进行删除");
+					
+					return;
 				}
 				
 				
-			}
+				var str="";
+				
+				for(var i=0;i<chek.length;i++){
+					
+					if(chek[i].checked==true){
+						
+						str+=chek[i].value+",";
+					}
+				}
+				
+
+				str=str.slice(0,str.length-1);
+				
+				var queren=confirm("您确认要删除这些学生吗？");
+				
+				if(queren==true){
+					
+					location.href="Userservlet?action=deleteUser&ids="+str;
+				}else{
+					
+					location.reload();
+				}
+			}; */
+		
+		var  outAll=document.getElementById("outAll");
 			
+			outAll.onclick=function(){
+			
+				var flag=confirm("你确定导出所有用户信息吗？");
+				
+				if(flag){
+				
+					window.location.href="http://localhost/ssm_book/outAll "
+				
+				}
+			
+			};
+			
+			var outSelect=document.getElementById("outSelect");
+			
+			outSelect.onclick=function(){
+				
+				var chek=document.getElementsByName("ids");
+				
+				var flag = false;
+
+				for (i = 0; i < chek.length; i++) {
+
+					if (chek[i].checked == true) {
+					
+						flag = true;
+						
+						break;
+					}
+				}
+
+				if (flag == false) {
+					
+					alert("请至少选一项");
+					
+					return;
+
+				} else {    
+					
+					var str = "";
+
+					for (var i = 0; i < chek.length; i++) {
+
+						if (chek[i].checked == true) {
+
+							str += chek[i].value + ",";
+
+						}
+					}
+					
+					str = str.slice(0, str.length - 1);
+					
+					var flag = confirm("你确定导出选中的用户信息？");
+					
+					if (flag) {//确定
+						
+						//http://localhost:8080/SSM_bookmanger/outSelect/
+						
+						window.location.href = "http://localhost/ssm_book/outSelect/"+str;
+
+					}
+				}
+				
+			};
+
 		};
 		
-	var delete1=document.getElementById("delete1");
 	
-	delete1.onclick=function(){
-		
-		var chek=document.getElementsByName("ids");
+        $(function(){
+        	   
+        	$("table tr:even").addClass("info");
+        	  
+        	$("table tr:odd").addClass("danger");
+        	
+        });
+        		
+         $(function() {
+		        	       
+		         $("#deleteStudent").button();
+		        
+		         $("#selectAll").button();
+		        
+		         $("#noselectAll").button();
+		        
+		         $("#fanxuan").button();
+		        
+		         $("#outSelect").button();
+		        
+		         $("#outAll").button();
+		        
+		         $("#adduser").button();
+	
+         });
 
-        var flag=false;
-		
-		for(var i=0;i<chek.length;i++){
-			
-			if(chek[i].checked==true){
-				
-				flag=true;
-				
-				break;
-				
-			}
-		}
-			if(flag==false){
-				
-				alert("请至少选择一个进行删除！");
-				
-				return;
-				
-			}
-			var str="";
-			
-			for(var i=0;i<chek.length;i++){
-				
-				if(chek[i].checked==true){
-					
-					str=str+chek[i].value+",";
-					
-				}
-		
-			}
-			
-			str=str.slice(0,str.length-1);
-			
-			 queren=confirm("你确定要删除吗？");
-			
-			if(queren==true){
-				
-				location.href="http://localhost/ssm_book/delete/"+str;
-				
-			}else{
-				
-				location.reload();
-			}
-	
-	}
-	
-	var outAll=document.getElementById("outAll");
-	
-	outAll.onclick=function(){
-		
-		var flag=confirm("你确定要导出所有的用户吗？");
-		
-		if(flag){
-			
-			window.location.href="outputUserServlet?action=all";
-		}
-	}
-	
-    var outSelect=document.getElementById("outSelect");
-	
-	outSelect.onclick=function(){
-		
-		var chek=document.getElementsByName("ids");
-
-        var flag=false;
-		
-		for(var i=0;i<chek.length;i++){
-			
-			if(chek[i].checked==true){
-				
-				flag=true;
-				
-				break;
-				
-			}
-		}
-			if(flag==false){
-				
-				alert("请至少选择一个进行导出！");
-				
-				return;
-				
-			}
-			var str="";
-			
-			for(var i=0;i<chek.length;i++){
-				
-				if(chek[i].checked==true){
-					
-					str=str+chek[i].value+",";
-					
-				}
-		
-			}
-			
-			str=str.slice(0,str.length-1);
-		
-		var flag=confirm("你确定要导出选中的用户吗？");
-		
-		if(flag){
-			
-			window.location.href="outputUserServlet?action=select&ids="+str;
-			
-		}else{
-			
-			location.reload();
-		}
-	}
-}
-	
-$(function(){
-  
-	$("table tr:even").addClass("warning");
-   
-   $("table tr:odd").addClass("danger");
-  
-  });
-        
 </script>
 	
 </head>
+
 <body background=".\imgs\001.jpg">
+	
 	 <div class="container">
+		
 		<table align="center" width="600px" height="200px" border="1px" class="table"
+			
 			cellspacing="0" bordercolor="silver">
+			
 			<caption align="center" >
+				
 				<h1 align="center">
+					
 					<font color="red" >查看用户信息</font>
+				
 				</h1>
+				
 				<hr color="red" />
+			
 			</caption>
+			
 			<tr align="center">
+			
+			    <td>选择</td>
 			
 				<td>编号</td>
 				
@@ -243,7 +270,7 @@ $(function(){
 				
 				<td>注册时间</td>
 				
-				<td>删除</button></td>
+				<td>删除</td>
 				
 				<td>修改</td>
 				
@@ -252,6 +279,8 @@ $(function(){
 			<c:forEach items="${pb.beanList }" var="u" varStatus="s">
 			
 				<tr>
+				
+				<td><input type="checkbox" name="ids" value="${u.id}"></td>
 				
 				<td>${s.index+1 }</td>
 				
@@ -269,23 +298,28 @@ $(function(){
 				
 				<!--<fmt:formatDate value="${u.date }" pattern="yyyy-MM-dd"/>-->
 				
-			    <td><input type="checkbox" name="ids" value="${u.id }" /></td>
+			    <!--  <td><input type="checkbox" name="ids" value="${u.id }" /></td>-->
 
-			    <!--<td><a href="user/${u.id  }" class="deleteId btn btn-danger">删除</a></td>-->
+			    <td><a href="user/${u.id  }" class="deleteId btn btn-danger">删除</a></td>
 				
 				<td><a href="user/${u.id  }" class="btn btn-primary">修改</a></td>
 				
 				</tr>
+				
 			</c:forEach>
 			
+			<tr align="center"><td colspan="10">
+			<p>
+			<button id="selectAll"><span class="ui-icon ui-icon-circle-check"></span>全选</button>
+			<button id="noselectAll"><span class="ui-icon ui-icon-circle-close"></span>全不选</button>
+			<button id="fanxuan"><span class="ui-icon ui-icon-circle-check"></span>反选</button>
+			<button id="outSelect"><span class="ui-icon ui-icon-circle-triangle-n"></span>导出所选 </button>
+			<button id="outAll"> <span class="ui-icon ui-icon-circle-arrow-n"></span>导出所有</button>
+			<!-- <button id="deleteStudent"><span class="ui-icon ui-icon-trash ui-icon-sm"></span>删除</button> -->
+			</p>
+			</td>
 			<tr>
-				<td colspan="7"></td>
-				
-				<td align="center"><button id=delete1 class="btn btn-info btn-xs">删除</button></td>
-				
-				<td></td>
-				
-			</tr>
+			
 		</table>
 		<!-- 准备一个隐藏的表单 -->
 		<form action="" method="post" id="deleteForm">
@@ -342,7 +376,7 @@ $(function(){
 		</center>
 		<p align="center">第${pb.pageNow }页/共${pb.pages }页</p>
 		
-		<p align="center">
+		<!-- <p align="center">
 		
 		 <button id="selectall" class="btn btn-info btn-xs">全选</button>&nbsp;&nbsp;&nbsp;&nbsp;
 		 
@@ -354,13 +388,14 @@ $(function(){
 		 
 		 <button id="outSelect" class="btn btn-info btn-xs">导出选中</button>
 		
-		</p>
+		</p> -->
 		
 		<p align="center">
 		
 			<a href="addUser.jsp" class="btn btn-primary">添加用户</a>
 			
 		</p>
+		
 		</div>
 </body>
 </html>

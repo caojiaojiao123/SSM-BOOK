@@ -20,4 +20,6 @@ public interface UserMapper {
 	List<User> selectBypage(int index);
 
 	List<User> selectAllBypage();
+	
+	List<User> showUserById(String[] arr);
 }

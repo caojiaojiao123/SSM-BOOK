@@ -21,4 +21,6 @@ public interface UserService {
 
 	User queryOneUser(Integer id);
 
+	List<User> showUserByIds(String[] arr);
+
 }
