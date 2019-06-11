@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -40,34 +41,23 @@ public class UserHandler {
 	@Autowired
 	private UserService userService;
 
-	private File touxiang;
+	// 验证用户
+	@RequestMapping(value = "/validateUser", method = RequestMethod.GET)
+	public String validateUser(String username, HttpServletResponse response) throws IOException {
 
-	private String touxiangContentType;
+		System.out.println(username);
 
-	private String touxiangFileName;
+		User a = this.userService.validateUser(username);
 
-	public File getTouxiang() {
-		return touxiang;
-	}
+		if (a != null) {
 
-	public void setTouxiang(File touxiang) {
-		this.touxiang = touxiang;
-	}
+			response.getWriter().write("{\"valid\":\"false\"}");// 存在
+		} else {
 
-	public String getTouxiangContentType() {
-		return touxiangContentType;
-	}
+			response.getWriter().write("{\"valid\":\"true\"}");// 不存在
+		}
 
-	public void setTouxiangContentType(String touxiangContentType) {
-		this.touxiangContentType = touxiangContentType;
-	}
-
-	public String getTouxiangFileName() {
-		return touxiangFileName;
-	}
-
-	public void setTouxiangFileName(String touxiangFileName) {
-		this.touxiangFileName = touxiangFileName;
+		return null;
 	}
 
 	// @RequestMapping(value="/users",method=RequestMethod.GET)
@@ -110,20 +100,59 @@ public class UserHandler {
 	// return "addUser";
 	// }
 
+	// @RequestMapping(value = "/user", method = RequestMethod.POST)
+	// public String add(User user) {
+	//
+	// userService.save(user);
+	//
+	// return "redirect:/users";
+	// }
+
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
-	public String add(User user,MultipartFile touxiang) throws IllegalStateException, IOException {
-		
-		File file = new File("E:\\"+touxiang.getOriginalFilename());
-		
-		touxiang.transferTo(file);
-		
-		//String path=touxiang.getOriginalFilename();
-		
-		//String valPath="upload"+path;
+	public String add(String name, MultipartFile touxiang, String username, String password, String phone, String date,
+			HttpSession session) throws Exception {
 
-		userService.save(user);
+		String realPath = session.getServletContext().getRealPath("/upload");
 
-		return "redirect:/users";
+		int hashCode = touxiang.getOriginalFilename().hashCode();
+
+		String hex = Integer.toHexString(hashCode);
+
+		char c1 = hex.charAt(0);
+
+		char c2 = hex.charAt(1);
+
+		String redlName = UUID.randomUUID().toString() + "_" + touxiang.getOriginalFilename();
+
+		String savepath = "/" + c1 + "/" + c2 + "/" + redlName;
+
+		File saveFile = new File(realPath + savepath);
+
+		saveFile.mkdirs();
+
+		touxiang.transferTo(saveFile);
+
+		String realsavepath = "upload" + savepath;
+
+		System.out.println(realsavepath);
+
+		System.out.println("date=" + date);
+
+		User user = new User(null, name, realsavepath, username, password, phone, date);
+
+		int i = this.userService.save(user);
+
+		session.setAttribute("url", realsavepath);
+
+		if (i > 0) {
+
+			return "redirect:/users";
+
+		} else {
+
+			return "addUser";
+		}
+
 	}
 
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
@@ -159,64 +188,103 @@ public class UserHandler {
 		return "redirect:/users";
 
 	}
-	
-	 //6.选择导出用户
-    @RequestMapping(value="/outSelect/{ids}",method=RequestMethod.GET)
-   	public String  outSelect(@PathVariable("ids") String ids,HttpServletRequest request,HttpServletResponse response) throws IOException{
-    	
-    	String [] arr=ids.split(",");
-    	
-    	List<User> list=userService.showUserByIds(arr);
-    	
-    	String key="勾选";
-    	
+
+	// 修改头像
+	@RequestMapping(value = "/updateTouxiang", method = RequestMethod.POST)
+	public String updateTouxiang(Integer id, MultipartFile touxiang, HttpSession session) throws Exception {
+
+		String realPath = session.getServletContext().getRealPath("/upload");
+
+		int hashCode = touxiang.getOriginalFilename().hashCode();
+
+		String hex = Integer.toHexString(hashCode);
+
+		char c1 = hex.charAt(0);
+
+		char c2 = hex.charAt(1);
+
+		String redlName = UUID.randomUUID().toString() + "_" + touxiang.getOriginalFilename();
+
+		String savepath = "/" + c1 + "/" + c2 + "/" + redlName;
+
+		File saveFile = new File(realPath + savepath);
+
+		saveFile.mkdirs();
+
+		touxiang.transferTo(saveFile);
+
+		User user = new User();
+
+		String realsavepath = "upload" + savepath;
+
+		user.setId(id);
+
+		user.setTouxiang(realsavepath);
+
+		this.userService.updateTouxoiang(user);
+
+		return "redirect:/user/" + id;
+
+	}
+
+	// 6.选择导出用户
+	@RequestMapping(value = "/outSelect/{ids}", method = RequestMethod.GET)
+	public String outSelect(@PathVariable("ids") String ids, HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
+
+		String[] arr = ids.split(",");
+
+		List<User> list = userService.showUserByIds(arr);
+
+		String key = "勾选";
+
 		HSSFWorkbook workbook = new HSSFWorkbook();// 1.创建一个工作簿
 
-		HSSFSheet sheet = workbook.createSheet("用户信息表");//2. 创建一个工作表
-        
-		//设置单元格宽度
-		
-		sheet.setColumnWidth(4, 15*256);
-		
-		//3.创建行，并在行中写入数据（）
-		
-		//设置表头样式/颜色/对齐方式
-		
-		HSSFCellStyle style=workbook.createCellStyle();
-		
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER);//居中
-		
-		HSSFFont font=workbook.createFont();//设置字体颜色
-		
+		HSSFSheet sheet = workbook.createSheet("用户信息表");// 2. 创建一个工作表
+
+		// 设置单元格宽度
+
+		sheet.setColumnWidth(4, 15 * 256);
+
+		// 3.创建行，并在行中写入数据（）
+
+		// 设置表头样式/颜色/对齐方式
+
+		HSSFCellStyle style = workbook.createCellStyle();
+
+		style.setAlignment(HSSFCellStyle.ALIGN_CENTER);// 居中
+
+		HSSFFont font = workbook.createFont();// 设置字体颜色
+
 		font.setBold(true);
-		
+
 		font.setColor(HSSFFont.COLOR_RED);
-		
+
 		style.setFont(font);
-		
-		String[] title = {"编号", "姓名", "用户名", "密码", "手机", "注册时间" };
+
+		String[] title = { "编号", "姓名", "用户名", "密码", "手机", "注册时间" };
 
 		HSSFRow row = sheet.createRow(0);
-		
+
 		for (int i = 0; i < title.length; i++) {
-			
+
 			HSSFCell cell = row.createCell(i);
-           
+
 			cell.setCellStyle(style);
-			
+
 			cell.setCellValue(title[i]);
 
 		}
-	
-		//4.把list里面数据放进去
-		
-		//创建一个样式对象
-      
-		HSSFCellStyle style2=workbook.createCellStyle();
-       
-       style2.setAlignment(HSSFCellStyle.ALIGN_CENTER);
-		
-       for (int i = 0; i < list.size(); i++) {//循环几次创建几行
+
+		// 4.把list里面数据放进去
+
+		// 创建一个样式对象
+
+		HSSFCellStyle style2 = workbook.createCellStyle();
+
+		style2.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+
+		for (int i = 0; i < list.size(); i++) {// 循环几次创建几行
 
 			HSSFRow row2 = sheet.createRow(i + 1);// 从第二行开始
 
@@ -257,41 +325,169 @@ public class UserHandler {
 			cell6.setCellStyle(style2);
 
 			cell6.setCellValue(user.getDate());
-			
-			
+
 		}
-		//把内存中的数据输出到硬盘上
-		
-        File f=new File("用户信息.xls");
-		
-		OutputStream outputStream=new FileOutputStream(f);
-		
-		workbook.write(outputStream);//把工作簿的内容保存到person.xls上
-		
-		//相应浏览器
-		
-		String file=f.getName();
-		
-		//file=new String(file.getBytes("ISO-8859-1"),"UTF-8");
-		
-		String mime=request.getServletContext().getMimeType(file);
-		
-		String fileName=DownUtils.filenameEncoding(key+f.getName(), request);   
-		
-		String dispostition="attachment;filename="+fileName;
-		
+		// 把内存中的数据输出到硬盘上
+
+		File f = new File("用户信息.xls");
+
+		OutputStream outputStream = new FileOutputStream(f);
+
+		workbook.write(outputStream);// 把工作簿的内容保存到person.xls上
+
+		// 相应浏览器
+
+		String file = f.getName();
+
+		// file=new String(file.getBytes("ISO-8859-1"),"UTF-8");
+
+		String mime = request.getSession().getServletContext().getMimeType(file);
+
+		String fileName = DownUtils.filenameEncoding(key + f.getName(), request);
+
+		String dispostition = "attachment;filename=" + fileName;
+
 		response.setHeader("Content-Type", mime);
-		
+
 		response.setHeader("Content-DisPosition", dispostition);
-		
-		InputStream inputStream=new FileInputStream(file);
-		
-		ServletOutputStream out=response.getOutputStream();
-		
+
+		InputStream inputStream = new FileInputStream(file);
+
+		ServletOutputStream out = response.getOutputStream();
+
 		IOUtils.copy(inputStream, out);
-		
+
 		return null;
-	
+
+	}
+
+	@RequestMapping(value = "/outAll", method = RequestMethod.GET)
+	public String outAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+		List<User> list = userService.list2();
+
+		String key = "全部";
+
+		HSSFWorkbook workbook = new HSSFWorkbook();// 1.创建一个工作簿
+
+		HSSFSheet sheet = workbook.createSheet("用户信息表");// 2. 创建一个工作表
+
+		// 设置单元格宽度
+
+		sheet.setColumnWidth(4, 15 * 256);
+
+		// 3.创建行，并在行中写入数据（）
+
+		// 设置表头样式/颜色/对齐方式
+
+		HSSFCellStyle style = workbook.createCellStyle();
+
+		style.setAlignment(HSSFCellStyle.ALIGN_CENTER);// 居中
+
+		HSSFFont font = workbook.createFont();// 设置字体颜色
+
+		font.setBold(true);
+
+		font.setColor(HSSFFont.COLOR_RED);
+
+		style.setFont(font);
+
+		String[] title = { "编号", "姓名", "用户名", "密码", "手机", "注册时间" };
+
+		HSSFRow row = sheet.createRow(0);
+
+		for (int i = 0; i < title.length; i++) {
+
+			HSSFCell cell = row.createCell(i);
+
+			cell.setCellStyle(style);
+
+			cell.setCellValue(title[i]);
+
+		}
+
+		// 4.把list里面数据放进去
+
+		// 创建一个样式对象
+
+		HSSFCellStyle style2 = workbook.createCellStyle();
+
+		style2.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+
+		for (int i = 0; i < list.size(); i++) {// 循环几次创建几行
+
+			HSSFRow row2 = sheet.createRow(i + 1);// 从第二行开始
+
+			User user = list.get(i);
+
+			HSSFCell cell1 = row2.createCell(0);
+
+			cell1.setCellStyle(style2);
+
+			cell1.setCellValue(user.getId());
+
+			HSSFCell cell2 = row2.createCell(1);
+
+			cell2.setCellStyle(style2);
+
+			cell2.setCellValue(user.getName());
+
+			HSSFCell cell3 = row2.createCell(2);
+
+			cell3.setCellStyle(style2);
+
+			cell3.setCellValue(user.getUsername());
+
+			HSSFCell cell4 = row2.createCell(3);
+
+			cell4.setCellStyle(style2);
+
+			cell4.setCellValue(user.getPassword());
+
+			HSSFCell cell5 = row2.createCell(4);
+
+			cell5.setCellStyle(style2);
+
+			cell5.setCellValue(user.getPhone());
+
+			HSSFCell cell6 = row2.createCell(5);
+
+			cell6.setCellStyle(style2);
+
+			cell6.setCellValue(user.getDate());
+
+		}
+		// 把内存中的数据输出到硬盘上
+
+		File f = new File("用户信息.xls");
+
+		OutputStream outputStream = new FileOutputStream(f);
+
+		workbook.write(outputStream);// 把工作簿的内容保存到person.xls上
+
+		// 相应浏览器
+
+		String file = f.getName();
+
+		// file=new String(file.getBytes("ISO-8859-1"),"UTF-8");
+
+		String mime = request.getSession().getServletContext().getMimeType(file);
+
+		String fileName = DownUtils.filenameEncoding(key + f.getName(), request);
+
+		String dispostition = "attachment;filename=" + fileName;
+
+		response.setHeader("Content-Type", mime);
+
+		response.setHeader("Content-DisPosition", dispostition);
+
+		InputStream inputStream = new FileInputStream(file);
+
+		ServletOutputStream out = response.getOutputStream();
+
+		IOUtils.copy(inputStream, out);
+
+		return null;
 	}
 
 }

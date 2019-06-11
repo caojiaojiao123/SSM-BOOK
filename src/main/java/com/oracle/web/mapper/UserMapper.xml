@@ -22,6 +22,31 @@
       #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{date,jdbcType=VARCHAR})
   </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oracle.web.bean.User">
+    update user
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="touxiang != null">
+        touxiang = #{touxiang,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
   <update id="updateByPrimaryKey" parameterType="com.oracle.web.bean.User">
     update user
     set name = #{name,jdbcType=VARCHAR},
@@ -57,13 +82,25 @@
   </select>
   
   <select id="showUserById" parameterType="java.lang.String" resultMap="BaseResultMap">
-   
-    <foreach item="arr" collection="array" index="no" open="(" separator="," close=")">
-    
-    #{arr}
-	
-	</foreach>
   
+   select * from user where id in
+   
+  <foreach item="arr" collection="array" index="no" open="(" separator="," close=")">
+    
+   #{arr}
+	
+  </foreach>
+  
+  </select>
+  
+  <select id="selectAll2" resultMap="BaseResultMap">
+  
+  select * from user
+  
+  </select>
+  
+  <select id="selectValidate" parameterType="String" resultType="user">
+  	select * from user where username = #{username}
   </select>
   
 </mapper>

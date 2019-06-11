@@ -9,15 +9,16 @@
 
 <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
 
-<link rel="stylesheet" href="tubiao/iconfont.css">
-
 <script type="text/javascript" src="bootstrap/js/jquery.js"></script>
 
 <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
 
 <link type="text/css" rel="stylesheet" href="jquery-ui.css">
+
 <script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+
 <script type="text/javascript" src="js/jquery-ui.js"></script>
+
 <script type="text/javascript">
 
 $(function() {
@@ -85,6 +86,64 @@ window.onload=function(){
 				}
 			};
 		
+			var df = document.getElementById("dfd");
+
+			df.onclick = function() {
+
+				var flag = false;
+
+				for (i = 0; i < chek.length; i++) {
+
+					if (chek[i].checked == true) {
+						flag = true;
+						break;
+					}
+				}
+
+				if (flag == false) {
+					alert("请至少选一项");
+					return;
+
+				} else {
+
+					var str = "";
+
+					for (var i = 0; i < chek.length; i++) {
+
+						if (chek[i].checked == true) {
+
+							str += chek[i].value + ",";
+
+						}
+					}
+					str = str.slice(0, str.length - 1);
+
+					var flag = confirm("你确定删除所勾选的用户吗？");
+					if (flag == true) {//确定
+						//拿到请求地址
+
+						var $url = "http://localhost/ssm_book/user/" + str;
+						/* var $url = "http://localhost/Book/deleteUser/" + str
+							+ "/${pb.pageNow}";  */
+
+						//var $url = this.href;
+						//拿到表单
+						$("#deleteForm").attr("action", $url);
+
+						//提交表单
+						$("#deleteForm").submit();
+
+						return false;
+
+					} else {//取消
+
+						window.location.href = "http://localhost/ssm_book/users";
+
+					}
+
+				}
+			};
+			
 			/* var deleteStudent=document.getElementById("deleteStudent");
 			var chek=document.getElementsByName("ids");
 			deleteStudent.onclick=function(){
@@ -126,7 +185,11 @@ window.onload=function(){
 				
 				if(queren==true){
 					
-					location.href="Userservlet?action=deleteUser&ids="+str;
+					//拿到请求地址
+
+					var $url = "http://localhost/ssm_book/user/" + str;
+					
+					//location.href="Userservlet?action=deleteUser&ids="+str;
 				}else{
 					
 					location.reload();

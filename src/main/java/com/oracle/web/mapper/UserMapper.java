@@ -14,6 +14,8 @@ public interface UserMapper {
     List<User> selectAll();
 
     int updateByPrimaryKey(User record);
+    
+    int updateByPrimaryKeySelective(User record);
 
 	int selectCount();
 
@@ -22,4 +24,11 @@ public interface UserMapper {
 	List<User> selectAllBypage();
 	
 	List<User> showUserById(String[] arr);
+
+	List<User> selectAll2();
+
+	User selectValidate(String username);
+
+	//void updateByPrimaryKeySelective(User user);
+
 }

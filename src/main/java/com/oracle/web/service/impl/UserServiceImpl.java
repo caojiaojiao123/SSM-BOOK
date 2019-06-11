@@ -101,14 +101,32 @@ public class UserServiceImpl implements UserService {
 	public void update(User user) {
 		// TODO Auto-generated method stub
 		
-		this.userMapper.updateByPrimaryKey(user);
+		this.userMapper.updateByPrimaryKeySelective(user);
 	}
 
 	@Override
 	public List<User> showUserByIds(String[] arr) {
 		// TODO Auto-generated method stub
 		
-		return userMapper.showUserById(arr);
+		return this.userMapper.showUserById(arr);
+	}
+
+	@Override
+	public List<User> list2() {
+		// TODO Auto-generated method stub
+		return this.userMapper.selectAll2();
+	}
+
+	@Override
+	public void updateTouxoiang(User user) {
+		// TODO Auto-generated method stub
+		this.userMapper.updateByPrimaryKeySelective(user);
+	}
+
+	@Override
+	public User validateUser(String username) {
+		// TODO Auto-generated method stub
+		return this.userMapper.selectValidate(username);
 	}
 
 }
