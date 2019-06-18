@@ -29,4 +29,6 @@ public interface UserService {
 
 	User validateUser(String username);
 
+	void delete1(String[] arr);
+
 }

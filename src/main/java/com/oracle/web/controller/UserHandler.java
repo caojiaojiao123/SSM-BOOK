@@ -156,13 +156,22 @@ public class UserHandler {
 	}
 
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
-	public String delete(@PathVariable("id") Integer id) {
+	public String delete(@PathVariable("id") String ids) {
 
-		User user = new User();
-
-		user.setId(id);
-
-		userService.delete(user);
+		 String[] arr = ids.split(",");
+			
+			for(String str : arr){
+				
+				System.out.println(str);
+			}
+			
+			userService.delete1(arr);
+		
+//		User user = new User();
+//
+//		user.setId(id);
+//
+//		userService.delete(user);
 
 		return "redirect:/users";
 	}
@@ -228,7 +237,7 @@ public class UserHandler {
 	}
 
 	// 6.选择导出用户
-	@RequestMapping(value = "/outSelect/{ids}", method = RequestMethod.GET)
+	@RequestMapping(value = "/outSelect2/{ids}", method = RequestMethod.GET)
 	public String outSelect(@PathVariable("ids") String ids, HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 
@@ -361,7 +370,7 @@ public class UserHandler {
 
 	}
 
-	@RequestMapping(value = "/outAll", method = RequestMethod.GET)
+	@RequestMapping(value = "/outAll2", method = RequestMethod.GET)
 	public String outAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 		List<User> list = userService.list2();

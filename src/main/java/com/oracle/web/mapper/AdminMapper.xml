@@ -7,7 +7,6 @@
     <result column="touxiang" jdbcType="VARCHAR" property="touxiang" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="repassword" jdbcType="VARCHAR" property="repassword" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -16,10 +15,10 @@
   </delete>
   <insert id="insert" parameterType="com.oracle.web.bean.Admin">
     insert into admin (id, name, touxiang, 
-      username, password, repassword, 
+      username, password,  
       phone)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{touxiang,jdbcType=VARCHAR}, 
-      #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{repassword,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
       #{phone,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.oracle.web.bean.Admin">
@@ -28,17 +27,31 @@
       touxiang = #{touxiang,jdbcType=VARCHAR},
       username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      repassword = #{repassword,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, name, touxiang, username, password, repassword, phone
+    select id, name, touxiang, username, password, phone
     from admin
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, name, touxiang, username, password, repassword, phone
+    select id, name, touxiang, username, password, phone
     from admin
   </select>
+  <select id="selectValidate" parameterType="String" resultType="admin">
+  	select * from admin where username = #{username}
+  </select>
+  
+  <select id="queryAdmin" parameterType="Admin" resultType="Admin">
+        select * from Admin
+        <where>
+            <if test="username != null and username != ''">
+                and username = #{username}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+        </where>
+    </select>
 </mapper>

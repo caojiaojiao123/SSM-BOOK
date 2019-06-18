@@ -14,4 +14,14 @@ public interface AdminMapper {
     List<Admin> selectAll();
 
     int updateByPrimaryKey(Admin record);
+
+	Admin login(String username);
+
+	Admin showAdmin(String uname);
+
+	int updatePassword(String uname, String newpassword);
+
+	Admin selectValidate(String username);
+
+	Admin queryAdmin(Admin admin);
 }

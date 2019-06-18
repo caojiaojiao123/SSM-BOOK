@@ -29,6 +29,8 @@ public interface UserMapper {
 
 	User selectValidate(String username);
 
+	void deleteByPrimaryKey(String[] arr);
+
 	//void updateByPrimaryKeySelective(User user);
 
 }

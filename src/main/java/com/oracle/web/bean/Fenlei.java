@@ -1,43 +1,28 @@
 package com.oracle.web.bean;
 
-import java.util.List;
-
 public class Fenlei {
-	
-	private int id;
-	
-	private String name;
+    private Integer fid;
 
-	public Fenlei(int id, String name) {
-		super();
-		this.id = id;
-		this.name = name;
-	}
+    private String fname;
 
-	public Fenlei() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    public Integer getFid() {
+        return fid;
+    }
 
-	public int getId() {
-		return id;
-	}
+    public void setFid(Integer fid) {
+        this.fid = fid;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public String getFname() {
+        return fname;
+    }
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setFname(String fname) {
+        this.fname = fname == null ? null : fname.trim();
+    }
 
 	@Override
 	public String toString() {
-		return "Fenlei [id=" + id + ", name=" + name + "]";
+		return "Fenlei [fid=" + fid + ", fname=" + fname + "]";
 	}
-	
 }

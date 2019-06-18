@@ -70,7 +70,7 @@ width:250px;
 		      
 		   <li><a href="addFenlei.jsp" target="right"><span class="ui-icon ui-icon-plus"></span>添加分类</a></li>
 		   
-		   <li><a href="fenlei" target="right"><span class="ui-icon ui-icon-folder-open"></span>查看分类</a></li>
+		   <li><a href="fenleis" target="right"><span class="ui-icon ui-icon-folder-open"></span>查看分类</a></li>
 		   
 		   <!--  <li><a href="changeFenlei.jsp" target="right"><span class="ui-icon ui-icon-tag"></span>修改分类</a></li>-->
 		
@@ -80,11 +80,11 @@ width:250px;
 		
 		<div>
 	
-		   <li><a href="addBook.jsp" target="right"><span class="ui-icon ui-icon-cart"></span>添加图书</a></li>
+		   <li><a href="addBookUl" target="right"><span class="ui-icon ui-icon-cart"></span>添加图书</a></li>
 		   
-		   <li><a href="BookServlet?action=showBookByPage"target="right"><span class="ui-icon ui-icon-folder-open"></span>查看图书</a></li>
+		   <li><a href="showBookHandler/1"target="right"><span class="ui-icon ui-icon-folder-open"></span>查看图书</a></li>
 		   
-		   <li><a href="changeBook.jsp" target="right"><span class="ui-icon ui-icon-bookmark"></span>修改图书</a></li>
+		   <!-- <li><a href="changeBook.jsp" target="right"><span class="ui-icon ui-icon-bookmark"></span>修改图书</a></li> -->
 	
 		</div>
 		
@@ -104,9 +104,9 @@ width:250px;
 		
 		<div>
 		
-		   <li><a href="showAdmin.jsp" target="right"><span class="ui-icon ui-icon-locked"></span>查看管理员</a></li>
+		   <li><a href="AdminServlet?action=showxinxi&username=${username }" target="right"><span class="ui-icon ui-icon-locked"></span>查看管理员</a></li>
 		   
-		   <li><a href="changepassword.jsp" target="right"><span class="ui-icon ui-icon-unlocked"></span>修改密码</a></li>
+		   <li><a href="AdminServlet?action=changepassword&username=${username }" target="right"><span class="ui-icon ui-icon-unlocked"></span>修改密码</a></li>
 		   
 		   <li><a href="AdminServlet?action=exitSystem" target="_parent"><span class="ui-icon ui-icon-power"></span>退出系统</a></li>
 		   	   

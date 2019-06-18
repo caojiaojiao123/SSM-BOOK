@@ -1,25 +1,42 @@
 package com.oracle.web.bean;
 
-import java.io.Serializable;
 import java.util.List;
 
-public class PageBean<T> implements Serializable{
+public class PageBean<T> {
+	private Integer pageNow;
 
-	private static final long serialVersionUID = 1L;
-
-	private int pageNow;
-	
 	private int counts;
-	
 	private int pageSize;
-	
-	private List<T>  beanList;
+	private List<T> beanList;
+	private String url;
 
-	public int getPageNow() {
+	public PageBean(Integer pageNow, int counts, int pageSize, List<T> beanList, String url) {
+		super();
+		this.pageNow = pageNow;
+		this.counts = counts;
+		this.pageSize = pageSize;
+		this.beanList = beanList;
+		this.url = url;
+	}
+
+	public int getPages() {
+		int pages = this.counts / this.pageSize;
+		return (this.counts % this.pageSize == 0) ? pages : pages + 1;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public Integer getPageNow() {
 		return pageNow;
 	}
 
-	public void setPageNow(int pageNow) {
+	public void setPageNow(Integer pageNow) {
 		this.pageNow = pageNow;
 	}
 
@@ -30,17 +47,6 @@ public class PageBean<T> implements Serializable{
 	public void setCounts(int counts) {
 		this.counts = counts;
 	}
-
-	public int getPages() {
-		
-		int pages=this.counts/this.pageSize;
-		
-		return (this.counts%this.pageSize==0)?pages:pages+1;
-	}
-
-//	public void setPages(int pages) {
-//		this.pages = pages;
-//	}
 
 	public int getPageSize() {
 		return pageSize;
@@ -58,12 +64,15 @@ public class PageBean<T> implements Serializable{
 		this.beanList = beanList;
 	}
 
+	public PageBean() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public String toString() {
 		return "PageBean [pageNow=" + pageNow + ", counts=" + counts + ", pageSize=" + pageSize + ", beanList="
-				+ beanList + "]";
+				+ beanList + ", url=" + url + "]";
 	}
-	
-	
 
 }

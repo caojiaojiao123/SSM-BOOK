@@ -13,303 +13,208 @@
 
 <meta charset="UTF-8">
 
-<!-- 移动设备优先 -->
-
-<meta name="viewport" content="width=device-width, initial-scale=1"> 
-
-<!-- 导入核心的css文件 -->
-
-<link  rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
-
-<link  rel="stylesheet" href="bootstrap/css/bootstrapValidator.css"/>
-
-<!-- 需要引入jQuery文件 -->
+<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
 
 <script type="text/javascript" src="bootstrap/js/jquery.js"></script>
 
-<!-- 引入BootScript的核心JS文件 -->
-
 <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
 
-<script type="text/javascript" src="bootstrap/js/bootstrapValidator.js"></script>
+<link type="text/css" rel="stylesheet" href="jquery-ui.css">
 
-<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+
+<script type="text/javascript" src="js/jquery-ui.js"></script>
+
+<link rel="stylesheet" href="bootstrap/css/bootstrapValidator.css" />
+
+<script type="text/javascript" src="bootstrap/js/bootstrapValidator.js"></script>
 
 <script type="text/javascript" src="js/ajax.js"></script>
 
 <script type="text/javascript">
-
-	function validateName() {
-
-		var name = document.register.name;
-
-		nameReg = /^[\u0391-\uFFE5{2,10}$]/;
-
-		var flag = nameReg.test(name.value);
-
-		var nameMsg = document.getElementById("nameMsg");
-
-		if (flag) {
-
-			nameMsg.style.color = "green";
-
-			nameMsg.innerHTML = "姓名合法";
-
-			return true;
-
-		} else {
-
-			nameMsg.style.color = "red";
-
-			nameMsg.innerHTML = "姓名必须是汉字";
-
-			name.focus();
-
-			return false;
-
-		}
-
-	}
-
-	//2.验证用户名
-<%--function validateusername() {
-
-		// var flag=false;
-
-		var flag;
-
-		var username = document.register.username;
-
-		var xmlhttp = getXMLHttpRequest();
-
-		xmlhttp.open("POST", "AdminServlet", true);
-
-		xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-
-		xmlhttp.send("action=validateusername&username=" + username.value);
-
-		xmlhttp.onreadystatechange = function() {
-
-			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-
-				var content = xmlhttp.responseText;
-
-				//alert(content);
-
-				var span = document.getElementById("usernameMsg");
-
-				if (content == "0") {
-
-					span.style.color = "green";
-
-					span.innerHTML = "用户名合法";
-
-					flag = true;
-
-				} else {
-
-					span.style.color = "red";
-
-					span.innerHTML = "用户名已存在";
-
-					span.focus();
-
-					flag = false;
-								
-				}
-
-			}
-
-		}
-
-		// return flag;
-	}--%>
-	
-	function validateusername() {
-
-		var username = document.register.username;
-
-		nameReg = /^\w{3,15}$/;
-
-		var flag = nameReg.test(username.value);
-
-		var usernameMsg = document.getElementById("usernameMsg");
-
-		if (flag) {
-
-			usernameMsg.style.color = "green";
-
-			usernameMsg.innerHTML = "用户名输入正确";
-
-			var username = document.register.username;
-
-			var xmlhttp = getXMLHttpRequest();
-
-			xmlhttp.open("POST", "AdminServlet", true);
-
-			xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-
-			xmlhttp.send("action=validateusername&username=" + username.value);
-
-			xmlhttp.onreadystatechange = function() {
-
-				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-
-					var content = xmlhttp.responseText;
-
-					var span = document.getElementById("usernameMsg");
-
-					if (content == "0") {
-
-						span.style.color = "green";
-
-						span.innerHTML = "你输入的用户名合法";
-
-						span.focus();
-
-						flag = true;
-
-					} else {
-
-						span.style.color = "red";
-
-						span.innerHTML = "用户名已存在";
-
-						flag = false;
-
-					}
-
-				}
-
-			}
-
-			return true;
-			
-		} else {
-			
-			usernameMsg.style.color = "red";
-
-			usernameMsg.innerHTML = "用户名已存在，请重新输入";
-
-			username.focus();
-
-			return false;
-		}
-
-	}
-
-	//3.验证密码
-
-	function validatepassword() {
-
-		var password = document.register.password;
-
-		var reg = /^(\w|\W){6,15}$/;
-
-		var passwordMsg = document.getElementById("passwordMsg");
-
-		if (reg.test(password.value)) {//true
-
-			passwordMsg.style.color = "green";
-
-			passwordMsg.innerHTML = "密码合法";
-
-			return true;
-
-		} else {
-
-			passwordMsg.style.color = "red";
-
-			passwordMsg.innerHTML = "密码必须是6-15的任意符号";
-
-			password.focus();
-
-			return false;
-
-		}
-
-	}
-
-	//4.确认密码
-
-	function validaterepassword() {
-
-		var password = document.register.password;
-
-		var repassword = document.register.repassword;
-
-		var repasswordMsg = document.getElementById("repasswordMsg");
-
-		if (repassword.value == password.value) {//true
-
-			repasswordMsg.style.color = "green";
-
-			repasswordMsg.innerHTML = "两次密码一致";
-
-			return true;
-
-		} else {//false
-
-			repasswordMsg.style.color = "red";
-
-			repasswordMsg.innerHTML = "两次密码不一致";
-
-			repassword.focus();
-
-			return false;
-
-		}
-
-	}
-
-	//5.验证手机号码
-
-	function validatephone() {
-
-		var phone = document.register.phone;
-
-		var reg = /^1[3-9][0-9]{9}$/;
-
-		var phoneMsg = document.getElementById("phoneMsg");
-
-		if (reg.test(phone.value)) {//true
-
-			phoneMsg.style.color = "green";
-
-			phoneMsg.innerHTML = "手机号合法";
-
-			return true;
-
-		} else {//false
-
-			phoneMsg.style.color = "red";
-
-			phoneMsg.innerHTML = "手机号不合法";
-
-			phone.focus();
-
-			return false;
-
-		}
-
-	}
-
-	function jiaoyan() {
-
-		return validateName() && validateusername() && validatepassword()
-				&& validaterepassword() && validatephone();
-
-	}
+	$(function() {
+
+		$(".form-horizontal").bootstrapValidator({
+
+			feedbackIcons:{
+				 valid: 'glyphicon glyphicon-ok',
+		            invalid: 'glyphicon glyphicon-remove',
+		            validating: 'glyphicon glyphicon-refresh'
+				
+			}, 
+							fields : {
+
+								name : {
+									validators : {
+
+										notEmpty : {
+
+											message : '姓名不能为空'
+										},
+										stringLength : {
+											min : 2,
+											max : 15,
+											message : '姓名必须是2-15个汉字'
+										},
+										regexp : {
+											regexp : /^[\u0391-\uFFE5]{2,15}$/,
+											message : '姓名必须是2-15个汉字'
+										}
+
+									}
+								},
+								username : {
+									validators : {
+
+										notEmpty : {
+
+											message : '用户名不能为空'
+										},
+										stringLength : {
+											min : 3,
+											max : 15,
+											message : '用户名必须是3-15个字母或数字组成'
+										},
+										
+										
+										remote : {
+											url : "yanzheng",
+											message : '该用户名已存在',
+											delay : 500,
+											type : 'GET',
+											data : function(validator) {
+												return {
+													username : $("input[name=username]").val()
+
+												}
+											}
+
+										}
+
+									}
+
+								},
+								password : {
+									validators : {
+										notEmpty : {
+
+											message : '密码不能为空'
+										},
+										different : {
+											field : 'username',
+											message : '密码不能和用户名一样'
+										},
+										regexp : {
+											regexp : /^(?=.*\d)(?=.*[A-z])[A-z\d]{6,15}$/,
+											message : '密码是6-15位，必须含有字母和数字'
+										},
+									}
+								},
+								repassword : {
+									validators : {
+										notEmpty : {
+
+											message : '确认密码不能为空'
+										},
+										identical : {
+											field : 'password',
+											message : '与密码不一致，请重新输入!'
+										}
+									}
+								},
+								phone : {
+									validators : {
+										notEmpty : {
+
+											message : '电话号码不能为空'
+										},
+										regexp : {
+											regexp : /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/,
+											message : '请输入正确的电话号码'
+										},
+									}
+								},
+								touxiang : {
+
+									validators : {
+										file : {
+											extension : 'pdf,jpg,gif,png,bmp,jpeg',
+											type : 'image/pdf,image/jpg,image/gif,image/png,image/bmp,image/jpeg',
+											message : '头像不合法.'
+										}
+									}
+								}
+
+							}
+
+						})
+	});
 </script>
-
-<title>注册</title>
-
 <style>
+td {
+	color: #663300;
+	font-size: 20px;
+}
 
 body {
-
 	margin: 0;
+}
+
+.icon {
+	width: 1em;
+	height: 1em;
+	vertical-align: -0.15em;
+	fill: currentColor;
+	overflow: hidden;
+	margin-top: 10px;
+}
+
+.footer {
+	color: #777;
+	border-top: 1px solid #e5e5e5;
+	text-align: center;
+	padding: 30px 0;
+}
+
+ #div1 {
+	height: 130px;
+	background-color: #FFFFFF;
+}
+#top2{
+
+	 margin-top: 42px;
+	 margin-left: 90px;
+}
+/* .bg {
+	background:url("imgs/001.jpg") no-repeat center 0;
+
+ height: 600px;
 	
+ width: 2000px;
+}
+ */
+#fr{
+	border: 2px solid #FFFFFF;
+    background-color: #FFFFFF;
+	opacity:0.96;
+	margin-top: 60px;
+}
+
+h2 {
+	font-size: 34px;
+}
+
+label {
+	font-size: 16px;
+}
+
+.btn-danger {
+	background-color: #2D6A9C;
+}
+
+a {
+	text-decoration: none;
+	color: #FFFFFF;
 }
 </style>
 
@@ -317,138 +222,110 @@ body {
 
 <body>
 
-	<%-- <c:if test="${!(empty msg) }">
-	
-   <script>
-   
-       alert("${msg}");
-       
-   </script>
-   
-   <c:remove var="msg" scope="session"/>
-   
-</c:if>--%>
+	<div class="container-fluid">
+		<div class="row header" id="div1">
+			<!-- 上 -->
+			<div class="col col-md-8 col-sm-10" id="top">
+				<div class="col col-md-6 " id="top2">
 
-	<table width="100%" height="1000px" cellspacing="0">
+					<font size="7" color="#2D6B9E" face='华文中宋'>图书管理系统</font><font
+						size="5" color="#2D6B9E"> | </font><font size="3" color="#2D6B9E"
+						face='华文中宋'>注册</font>
+					<!-- </marquee> -->
 
-		<tr height="80px">
 
-			<td colspan="2">
+				</div>
+			</div>
+		</div>
 
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font
-				
-				color="red" size="7" face="黑体"><b>Oracle</b></font>&nbsp;<font
-				
-				size="6">图书管理系统</font>&nbsp;<font size="6" color="silver">|</font>&nbsp;<font
-				
-				color="silver" size="5">注册</font>
+		<div class="container-fluid bg">
+			<!-- 中 -->
+			<div class="container">
+				<div class="col-md-5 col-sm-10  col-xs-12 col-md-offset-4" id="fr">
+					<form name="register" action="admin"
+						method="post" enctype="multipart/form-data"
+						class="form-horizontal">
+						<div class="form-group">
+							<h2 class="col-sm-7 col-sm-offset-3">
+								<font color="#2D6A9C" size="7" face="楷体"><b>管理员注册</b></font>
+							</h2>
+						</div>
 
-			</td>
+						<div class="form-group">
+							<label for="name" class="col-sm-4 control-label "> <font
+								color="#2D6A9C">姓名:</font></label>
+							<div class="col-sm-6">
+								<input type='text' name='name' class="form-control input-sm" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="touxiang" class="col-sm-4 control-label "> <font
+								color="#2D6A9C"> 头像: </font></label>
+							<div class="col-sm-6">
+								<input type="file" name='touxiang' class="form-control input-sm">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="username" class="col-sm-4 control-label "> <font
+								color="#2D6A9C"> 用户名 </font></label>
+							<div class="col-sm-6">
+								<input type='text' name='username' class="form-control input-sm">
 
-		</tr>
+							</div>
+						</div>
 
-		<tr background=".\imgs\004.jpg">
+						<div class="form-group">
+							<label for="password" class="col-sm-4 control-label  "> <font
+								color="#2D6A9C"> 密&nbsp;&nbsp;码: </font></label>
+							<div class="col-sm-6">
+								<input type="password" name='password'
+									class="form-control input-sm">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="repassword" class="col-sm-4 control-label "><font
+								color="#2D6A9C"> 确认密码: </font></label>
+							<div class="col-sm-6">
+								<input type="password" name='repassword'
+									class="form-control input-sm">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="phone" class="col-sm-4 control-label   "> <font
+								color="#2D6A9C"> 电话: </font>
+							</label>
+							<div class="col-sm-6">
+								<input type='text' name='phone' class="form-control input-sm">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-3 col-sm-10 col-xs-11 col-lg-offset-4 ">
+								<button type='submit' class="btn btn-primary ">
+									注册 <span class="glyphicon glyphicon-plus"></span>
 
-			<td width="50%"></td>
+								</button>
+							</div>
+							<div class="col-lg-3 col-sm-10 col-xs-11 ">
 
-			<td>
+								<a href='login.jsp' class="btn btn-primary">返回 <span
+									class="glyphicon glyphicon-repeat"> </span></a>
 
-				<form action="AdminServlet?action=register" method="post" name="register" onsubmit="return jiaoyan()" enctype="multipart/form-data">
+							</div>
+						</div>
 
-					<table align="center" frame="box" width="500px" height="280px">
+						<br> <br>
+					</form>
+				</div>
+			</div>
+		</div>
+		<footer class="footer">
+			<!-- 下 -->
 
-						<tr align="center">
-
-							<td>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</td>
-
-							<td><input type="text" name="name" onblur="validateName()" /></td>
-
-							<td><span id="nameMsg"></span></td>
-
-						</tr>
-						
-						<tr align="center">
-
-							<td>头&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;像：</td>
-
-							<td><input type="file" name="touxiang"/></td>
-
-						</tr>
-
-						<tr align="center">
-
-							<td>账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：</td>
-
-							<td><input type="text" name="username"
-							
-								onblur="validateusername()" /></td>
-
-							<td><span id="usernameMsg"></span></td>
-
-						</tr>
-
-						<tr align="center">
-
-							<td>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
-
-							<td><input type="password" name="password"
-							
-								onblur="validatepassword()" /></td>
-
-							<td><span id="passwordMsg"></span></td>
-
-						</tr>
-
-						<tr align="center">
-
-							<td>确认密码：</td>
-
-							<td><input type="password" name="repassword"
-							
-								onblur="validaterepassword()" /></td>
-
-							<td><span id="repasswordMsg"></span></td>
-
-						</tr>
-
-						<tr align="center">
-
-							<td>手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机：</td>
-
-							<td><input type="text" name="phone" onblur="validatephone()" /></td>
-
-							<td><span id="phoneMsg"></span></td>
-
-						</tr>
-
-						<tr align="center">
-
-							<td colspan="2" align="center"><input type="submit"
-								value="注册" />&nbsp;&nbsp;&nbsp;<input type="reset" value="重置" /></td>
-						</tr>
-
-					</table>
-
-				</form>
-
-				<p align="center">
-
-					是管理员，请点击<a href="login.jsp">登录</a>
-
-				</p>
-
-			</td>
-
-		</tr>
-
-		<tr height="100px">
-
-			<td colspan="2" align="center"><font color="silver" size="4"
-				face="华文新魏">oracle公司版权所有 &copy; 2012-2018</font></td>
-
-		</tr>
-
-	</table>
+			<h4>
+				<font size="3" color="#b1b1b1">oracle公司版权所有 &copy; 2012-2018</font>
+			</h4>
+		</footer>
+	</div>
 
 </body>
 

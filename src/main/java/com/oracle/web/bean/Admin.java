@@ -12,7 +12,7 @@ public class Admin {
 
     private String password;
 
-    private String repassword;
+    //private String repassword;
 
     private String phone;
 
@@ -56,13 +56,13 @@ public class Admin {
         this.password = password == null ? null : password.trim();
     }
 
-    public String getRepassword() {
-        return repassword;
-    }
-
-    public void setRepassword(String repassword) {
-        this.repassword = repassword == null ? null : repassword.trim();
-    }
+//    public String getRepassword() {
+//        return repassword;
+//    }
+//
+//    public void setRepassword(String repassword) {
+//        this.repassword = repassword == null ? null : repassword.trim();
+//    }
 
     public String getPhone() {
         return phone;
@@ -72,7 +72,7 @@ public class Admin {
         this.phone = phone == null ? null : phone.trim();
     }
 
-	public Admin(Integer id, String name, String touxiang, String username, String password, String repassword,
+	public Admin(Integer id, String name, String touxiang, String username, String password, 
 			String phone) {
 		super();
 		this.id = id;
@@ -80,13 +80,19 @@ public class Admin {
 		this.touxiang = touxiang;
 		this.username = username;
 		this.password = password;
-		this.repassword = repassword;
+		//this.repassword = repassword;
 		this.phone = phone;
 	}
 
 	public Admin() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String toString() {
+		return "Admin [id=" + id + ", name=" + name + ", touxiang=" + touxiang + ", username=" + username
+				+ ", password=" + password + ", phone=" + phone + "]";
 	}
     
     

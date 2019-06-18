@@ -33,14 +33,14 @@ public class UserServiceImpl implements UserService {
 		return this.userMapper.insert(user);
 	}
 
-	@Override
-	@Transactional
-	public void delete(User user) {
-		// TODO Auto-generated method stub
-		
-		this.userMapper.deleteByPrimaryKey(user.getId());
-		
-	}
+//	@Override
+//	@Transactional
+//	public void delete(User user) {
+//		// TODO Auto-generated method stub
+//		
+//		this.userMapper.deleteByPrimaryKey(user.getId());
+//		
+//	}
 
 	@Override
 	@Transactional
@@ -127,6 +127,18 @@ public class UserServiceImpl implements UserService {
 	public User validateUser(String username) {
 		// TODO Auto-generated method stub
 		return this.userMapper.selectValidate(username);
+	}
+
+	@Override
+	public void delete(User user) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete1(String[] arr) {
+		// TODO Auto-generated method stub
+		this.userMapper.deleteByPrimaryKey(arr);
 	}
 
 }

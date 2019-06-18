@@ -3,6 +3,7 @@ package com.oracle.web.service;
 import java.util.List;
 
 import com.oracle.web.bean.Fenlei;
+import com.oracle.web.bean.PageBean;
 
 public interface FenleiService {
 
@@ -12,12 +13,22 @@ public interface FenleiService {
 
 	int delete(Fenlei fenlei);
 
-	//int queryOneFenlei(Fenlei fenlei);
-
 	Fenlei queryOneFenlei(Integer id);
 
 	void update(Fenlei fenlei);
 
-	//Fenlei queryOneFenlei1(Integer id);
+	Fenlei queryOne(String name);
+
+	PageBean<Fenlei> showByPage(Integer pageNow);
+
+	List<Fenlei> showfenleiByIds(String[] arr);
+
+	List<Fenlei> showFenleiByIds(String[] arr);
+
+	List<Fenlei> list2();
+
+	void delete1(String[] arr);
+
+	//List<Fenlei> selectFenleiAll();
 
 }

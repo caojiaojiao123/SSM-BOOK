@@ -12,7 +12,13 @@
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user
-    where id = #{id,jdbcType=INTEGER}
+   
+     where id in
+     
+     <foreach item="arr" collection="array" index="no" open="(" separator="," close=")">	
+    	#{arr}
+    </foreach>
+  
   </delete>
   <insert id="insert" parameterType="com.oracle.web.bean.User">
     insert into user (id, name, touxiang, 

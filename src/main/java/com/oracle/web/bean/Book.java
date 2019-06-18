@@ -3,8 +3,6 @@ package com.oracle.web.bean;
 public class Book {
     private Integer id;
 
-    private String flname;
-
     private String name;
 
     private String price;
@@ -15,7 +13,9 @@ public class Book {
 
     private String username;
 
-    private Integer fid;
+    private Integer kucun;
+
+    private Integer f_id;
 
     public Integer getId() {
         return id;
@@ -23,14 +23,6 @@ public class Book {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getFlname() {
-        return flname;
-    }
-
-    public void setFlname(String flname) {
-        this.flname = flname == null ? null : flname.trim();
     }
 
     public String getName() {
@@ -73,11 +65,32 @@ public class Book {
         this.username = username == null ? null : username.trim();
     }
 
-    public Integer getFid() {
-        return fid;
+    public Integer getKucun() {
+        return kucun;
     }
 
-    public void setFid(Integer fid) {
-        this.fid = fid;
+    public void setKucun(Integer kucun) {
+        this.kucun = kucun;
     }
+
+	public Integer getF_id() {
+		return f_id;
+	}
+
+	public void setF_id(Integer f_id) {
+		this.f_id = f_id;
+	}
+
+	public Book() {
+		super();
+		this.f_id = f_id;
+	}
+
+	@Override
+	public String toString() {
+		return "Book [id=" + id + ", name=" + name + ", price=" + price + ", chubanshe=" + chubanshe + ", zhuangtai="
+				+ zhuangtai + ", username=" + username + ", kucun=" + kucun + ", f_id=" + f_id + "]";
+	}
+
+   
 }

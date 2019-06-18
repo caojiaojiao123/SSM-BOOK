@@ -8,12 +8,23 @@ public interface FenleiMapper {
 
     int insert(Fenlei record);
 
-    Fenlei selectByPrimaryKey(Integer id);
-    
+    Fenlei selectByPrimaryKey(Integer id);    
 
     List<Fenlei> selectAll();
 
     int updateByPrimaryKey(Fenlei record);
+
+	int deleteByPrimaryKey(String[] arr);
+
+	List<Fenlei> selectAll2();
+
+	List<Fenlei> showfenleiById(String[] arr);
+
+	List<Fenlei> showfenleiByIds(String[] arr);
+
+	List<Fenlei> showByPage();
+
+	Fenlei findfenlei(String name);
     
     
  }
