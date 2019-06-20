@@ -167,13 +167,13 @@ public class BookServiceImpl implements BookService {
 //	}
 
 	@Override
-	public List<Book> showUser() {// 导入全部：
+	public List<BookAndFenlei> showUser() {// 导入全部：
 		// TODO Auto-generated method stub
 		return this.bookMapper.selectAll2();
 	}
 
 	@Override
-	public List<Book> showUserByIds(String[] arr) {
+	public List<BookAndFenlei> showUserByIds(String[] arr) {
 		// TODO Auto-generated method stub
 		return this.bookMapper.showUserById(arr);
 	}

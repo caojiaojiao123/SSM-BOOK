@@ -109,13 +109,23 @@ public class FenleiServiceImpl implements FenleiService {
 		return this.fenleiMapper.selectAll2();
 	}
 
+//	@Override
+//	public void delete1(String[] arr) {
+//		// TODO Auto-generated method stub
+//		this.fenleiMapper.deleteByPrimaryKey(arr);
+//		
+//	}
+
 	@Override
-	public void delete1(String[] arr) {
+	public int yanzhengAddFenlei2(Integer id) {
 		// TODO Auto-generated method stub
-		this.fenleiMapper.deleteByPrimaryKey(arr);
-		
+		return this.fenleiMapper.yanzhengAddFenlei2(id);
 	}
 
-
+	@Override
+	public int delete1(Fenlei f) {
+		// TODO Auto-generated method stub
+		return this.fenleiMapper.deleteByPrimaryKey(f.getFid());
+	}
 
 }

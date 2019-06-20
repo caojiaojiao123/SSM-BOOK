@@ -25,6 +25,8 @@ public interface FenleiMapper {
 	List<Fenlei> showByPage();
 
 	Fenlei findfenlei(String name);
+
+	int yanzhengAddFenlei2(Integer id);
     
     
  }

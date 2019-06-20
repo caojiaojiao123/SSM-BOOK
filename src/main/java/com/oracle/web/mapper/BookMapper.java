@@ -37,7 +37,7 @@ public interface BookMapper {
 
 	List<BookAndFenlei> selectByGji(Book book);
 
-	List<Book> selectAll2();
+	List<BookAndFenlei> selectAll2();
 
-	List<Book> showUserById(String[] arr);
+	List<BookAndFenlei> showUserById(String[] arr);
 }

@@ -35,9 +35,9 @@ public interface BookService {
 
 //	File exportStudent();
 
-	List<Book> showUser();
+	List<BookAndFenlei> showUser();
 
-	List<Book> showUserByIds(String[] arr);
+	List<BookAndFenlei> showUserByIds(String[] arr);
 
 	// List<Book> showUserByIds(String[] arr);
 

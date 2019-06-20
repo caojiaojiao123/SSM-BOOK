@@ -27,7 +27,11 @@ public interface FenleiService {
 
 	List<Fenlei> list2();
 
-	void delete1(String[] arr);
+	//void delete1(String[] arr);
+
+	int yanzhengAddFenlei2(Integer id);
+
+	int delete1(Fenlei f);
 
 	//List<Fenlei> selectFenleiAll();
 

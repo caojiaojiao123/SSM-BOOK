@@ -83,7 +83,7 @@
 				
 			};
 	 
-	 var deleteF=document.getElementById("DeleteF");
+	/*  var deleteF=document.getElementById("DeleteF");
 		
 		deleteF.onclick=function(){
 			
@@ -128,10 +128,68 @@
 			} else {
 				window.location.href = "http://localhost/ssm_book/DeleteF/"+str;
 			}
+		}; */
+		 
+		 
+		//删除	  
+		var df = document.getElementById("DeleteF");
+
+	    var chek = document.getElementsByName("ids");
+	  
+		df.onclick = function() {
+
+			var flag = false;
+
+			for (i = 0; i < chek.length; i++) {
+
+				if (chek[i].checked == true) {
+					flag = true;
+					break;
+				}
+			}
+
+			if (flag == false) {
+				alert("请勾选一项");
+				return;
+
+			} else {    
+				
+				var str = "";
+                var m=0;
+				for (var i = 0; i < chek.length; i++) {
+
+					if (chek[i].checked == true) {
+                          m++;
+						str += chek[i].value + ",";
+
+					}
+					if(m>1){
+						alert("分类只支持一次删除一个");
+						return;
+					}
+				}
+				str = str.slice(0, str.length - 1);
+ 
+				var flage = confirm("你确定删除所勾选的分类吗？");
+				if (flage == true) {//确定
+					//拿到请求地址
+					var $url = "http://localhost/ssm_book/fenlei/"+ str;
+
+					//alert($url);
+					//拿到表单
+					$("#deleteForm").attr("action", $url);
+
+					//提交表单
+					$("#deleteForm").submit();				
+
+				} else {//取消
+
+					 
+					window.location.href = "http://localhost/ssm_book/fenleis/1";
+
+				}
+			}
 		};
-		 
-		 
-	 
 	 
 	 
 	 var  outAll=document.getElementById("OutAll");

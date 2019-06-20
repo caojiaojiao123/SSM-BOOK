@@ -252,7 +252,7 @@ public class BookHandler {
 			throws IOException {
 
 		String[] arr = ids.split(",");
-		List<Book> list = this.bookService.showUserByIds(arr);
+		List<BookAndFenlei> list = this.bookService.showUserByIds(arr);
 		String key = "勾选";
 
 		HSSFWorkbook workbook = new HSSFWorkbook();
@@ -261,7 +261,6 @@ public class BookHandler {
 		HSSFSheet sheet2 = workbook.createSheet();
 		// 设置单元格的宽度：：
 		sheet.setColumnWidth(4, 16 * 256);
-		
 
 		// 设置表头样式/颜色/对齐方式
 
@@ -276,16 +275,16 @@ public class BookHandler {
 		font.setColor(HSSFFont.COLOR_RED);
 
 		style.setFont(font);
-		
-//		// 创建一个样式对象：：
-//		HSSFCellStyle style = workbook.createCellStyle();
-//		// style.setAlignment(HSSFCellStyle.ALIGN_CENTER);// 居中：：
-//		HSSFFont font = workbook.createFont();// 设置字体样式：
-//		font.setBold(true);
-//		font.setColor(HSSFColor.BLUE.index);// 设置字体的颜色：
-//		style.setFont(font);// 一定要写到style中！！！
 
-		String[] title = { "编号", "姓名", "价格", "出版社", "状态", "借出人", "库存" };
+		// // 创建一个样式对象：：
+		// HSSFCellStyle style = workbook.createCellStyle();
+		// // style.setAlignment(HSSFCellStyle.ALIGN_CENTER);// 居中：：
+		// HSSFFont font = workbook.createFont();// 设置字体样式：
+		// font.setBold(true);
+		// font.setColor(HSSFColor.BLUE.index);// 设置字体的颜色：
+		// style.setFont(font);// 一定要写到style中！！！
+
+		String[] title = { "编号", "姓名", "价格", "出版社", "状态", "借出人", "库存", "分类名称" };
 
 		HSSFRow row = sheet.createRow(0);// 从0开始,第一行
 
@@ -310,7 +309,7 @@ public class BookHandler {
 
 			HSSFRow row2 = sheet.createRow(i + 1);// 从第二行开始 1 2 3 4 5
 
-			Book user1 = list.get(i);// 这是每个单元格设置：：
+			BookAndFenlei user1 = list.get(i);// 这是每个单元格设置：：
 
 			HSSFCell cell1 = row2.createCell(0);
 			// cell1.setCellStyle(style2);
@@ -347,10 +346,10 @@ public class BookHandler {
 
 			cell7.setCellValue(user1.getKucun());
 
-			// HSSFCell cell8 = row2.createCell(7);
-			// cell8.setCellStyle(style2);
-			//
-			// cell8.setCellValue(user1.getF_id());
+			HSSFCell cell8 = row2.createCell(7);
+			cell8.setCellStyle(style2);
+
+			cell8.setCellValue(user1.getFenlei().getFname());
 
 		}
 		// 内存，把数据输出到硬盘
@@ -395,7 +394,7 @@ public class BookHandler {
 
 	@RequestMapping(value = "/outAll", method = RequestMethod.GET)
 	public String outAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		List<Book> list = this.bookService.showUser();// 导入全部信息：
+		List<BookAndFenlei> list = this.bookService.showUser();// 导入全部信息：
 		String key = "全部";
 		HSSFWorkbook workbook = new HSSFWorkbook();
 		HSSFSheet sheet = workbook.createSheet("图书信息表");
@@ -418,14 +417,14 @@ public class BookHandler {
 		font.setColor(HSSFFont.COLOR_RED);
 
 		style.setFont(font);
-//		HSSFCellStyle style = workbook.createCellStyle();
-//		// style.setAlignment(HSSFCellStyle.ALIGN_CENTER);// 居中：：
-//		HSSFFont font = workbook.createFont();// 设置字体样式：
-//		font.setBold(true);
-//		font.setColor(HSSFColor.BLUE.index);// 设置字体的颜色：
-//		style.setFont(font);// 一定要写到style中！！！
+		// HSSFCellStyle style = workbook.createCellStyle();
+		// // style.setAlignment(HSSFCellStyle.ALIGN_CENTER);// 居中：：
+		// HSSFFont font = workbook.createFont();// 设置字体样式：
+		// font.setBold(true);
+		// font.setColor(HSSFColor.BLUE.index);// 设置字体的颜色：
+		// style.setFont(font);// 一定要写到style中！！！
 
-		String[] title = { "编号", "姓名", "价格", "出版社", "状态", "借出人", "库存" };
+		String[] title = { "编号", "姓名", "价格", "出版社", "状态", "借出人", "库存", "分类名称" };
 
 		HSSFRow row = sheet.createRow(0);// 从0开始,第一行
 
@@ -450,7 +449,7 @@ public class BookHandler {
 
 			HSSFRow row2 = sheet.createRow(i + 1);// 从第二行开始 1 2 3 4 5
 
-			Book user1 = list.get(i);// 这是每个单元格设置：：
+			BookAndFenlei user1 = list.get(i);// 这是每个单元格设置：：
 
 			HSSFCell cell1 = row2.createCell(0);
 			// cell1.setCellStyle(style2);
@@ -487,10 +486,10 @@ public class BookHandler {
 
 			cell7.setCellValue(user1.getKucun());
 
-			// HSSFCell cell8 = row2.createCell(7);
-			// cell8.setCellStyle(style2);
-			//
-			// cell8.setCellValue(user1.getF_id());
+			HSSFCell cell8 = row2.createCell(7);
+			cell8.setCellStyle(style2);
+
+			cell8.setCellValue(user1.getFenlei().getFname());
 
 		}
 		// 内存，把数据输出到硬盘

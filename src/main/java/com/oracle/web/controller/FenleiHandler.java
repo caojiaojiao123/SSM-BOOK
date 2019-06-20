@@ -85,21 +85,52 @@ public class FenleiHandler {
 			
 	}
 	
-	@RequestMapping(value = "/fenlei/{id}",method = RequestMethod.DELETE)
-	public String delete(@PathVariable("id") String ids){
+//	@RequestMapping(value = "/fenlei/{id}",method = RequestMethod.DELETE)
+//	public String delete(@PathVariable("id") String ids){
+//		
+//        String[] arr = ids.split(",");
+//		
+//		for(String str : arr){
+//			
+//			System.out.println(str);
+//		}
+//		
+//		fenleiService.delete1(arr);
+//		
+//		return "redirect:/fenleis";
+//		
+//		
+//	}
+	
+	@RequestMapping(value = "/fenlei/{id}", method = RequestMethod.DELETE)
+	public String delete(@PathVariable("id") String id1,HttpSession session) {
+
+		Integer id=Integer.parseInt(id1);
 		
-        String[] arr = ids.split(",");
+		int a= this.fenleiService.yanzhengAddFenlei2(id);
 		
-		for(String str : arr){
+		if(a==0){
+		
+			Fenlei f = new Fenlei();
+
+			f.setFid(id);
+
+			fenleiService.delete1(f);
+
+			session.setAttribute("mag", "删除成功");
 			
-			System.out.println(str);
+			return "redirect:/fenleis";
+
+		}else{
+			
+			session.setAttribute("mag", "该分类下有图书禁止删除");
+			 
+			return "redirect:/fenleis";
+
 		}
-		
-		fenleiService.delete1(arr);
-		
-		return "redirect:/fenleis";
-		
-		
+
+	 
+
 	}
 	
 	@RequestMapping(value = "/fenlei/{id}",method = RequestMethod.GET)

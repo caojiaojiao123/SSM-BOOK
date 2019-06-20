@@ -169,13 +169,14 @@
 	<!--  实现导出全部图书信息-->
 	<select id="selectAll2" resultMap="BookAndFenlei">
 
- select * from book 
+ select * from book,fenlei where book.f_id=fenlei.fid order
+		by book.id desc
   
 	</select>
 	<!--    实现导出选择的图书信息-->
-	<select id="showUserById" parameterType="java.lang.String" resultMap="BookAndFenlei">
+	<select id="showUserById"  resultMap="BookAndFenlei">
   
-   select * from book where id in
+   select * from book,fenlei where book.f_id=fenlei.fid and book.id in
    
 		<foreach item="arr" collection="array" index="no" open="(" separator="," close=")">
    #{arr}
