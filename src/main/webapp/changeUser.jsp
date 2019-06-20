@@ -94,7 +94,7 @@
 				
 				<div class="col-sm-4">
 					
-					<input type="text" name="password" value="${u.password }" class="form-control input-sm" />
+					<input type="password" name="password" value="${u.password }" class="form-control input-sm" />
 				
 				</div>
 			

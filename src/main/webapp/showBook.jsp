@@ -236,7 +236,7 @@
 }
 </style>
 </head>
-<body>
+<body background=".\imgs\001.jpg">
 	<div class="container-fluid   text-success" id="div1">
 		<c:if test="${!empty mag }">
 			<script>
@@ -252,7 +252,7 @@
 				<li><a id="outIds" href="#" class="text-success">导出选中</a></li>
 
 				<li><a id="outAll" href="#" class="text-success">导出全部</a></li>
-				<li><a id="" href="#" class="text-success">导入全部</a></li>
+			<!-- 	<li><a id="" href="#" class="text-success">导入全部</a></li> -->
 				<li><a id="dfd" href="#" class="text-success">删除</a></li>
 				<li class="dropdown"><a href="#"
 					class="dropdown-toggle  text-success" data-toggle="dropdown">高级搜索<span

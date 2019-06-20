@@ -3,25 +3,21 @@ package com.oracle.web.mapper;
 import com.oracle.web.bean.Admin;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface AdminMapper {
-	
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(Admin record);
+	int save(Admin admin);// 保存
 
-    Admin selectByPrimaryKey(Integer id);
+	Admin login(String username);// 登录
 
-    List<Admin> selectAll();
+	Admin queryone(String username);// 单个查询
 
-    int updateByPrimaryKey(Admin record);
+	Admin selectByPrimaryKey(String username);// 查看管理员
 
-	Admin login(String username);
+	Admin queryByPassword(Admin admin);// 密码
 
-	Admin showAdmin(String uname);
+	// 修改密码
 
-	int updatePassword(String uname, String newpassword);
-
-	Admin selectValidate(String username);
-
-	Admin queryAdmin(Admin admin);
+	Admin changepassword(@Param("username") String username, @Param("password") String newpassword);
 }

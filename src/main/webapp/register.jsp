@@ -63,36 +63,37 @@
 
 									}
 								},
+								touxiang : {
+
+									validators : {
+										file : {
+											extension : 'pdf,jpg,gif,png,bmp,jpeg',
+											type : 'image/pdf,image/jpg,image/gif,image/png,image/bmp,image/jpeg',
+											message : '头像不合法.'
+										}
+									}
+								},
 								username : {
 									validators : {
-
 										notEmpty : {
-
 											message : '用户名不能为空'
 										},
-										stringLength : {
-											min : 3,
-											max : 15,
-											message : '用户名必须是3-15个字母或数字组成'
+										regexp : {
+											regexp : /^[A-z0-9_]{3,25}$/,
+											message : '用户名必须由3-25个英文字母、数字和下划线组成'
 										},
-										
-										
 										remote : {
-											url : "yanzheng",
-											message : '该用户名已存在',
-											delay : 500,
-											type : 'GET',
+													
+											message : '该用户已被注册，请重新输入',
+											url : "validate2",
+											type : 'post',
 											data : function(validator) {
 												return {
 													username : $("input[name=username]").val()
-
 												}
 											}
-
 										}
-
 									}
-
 								},
 								password : {
 									validators : {
@@ -133,21 +134,12 @@
 											message : '请输入正确的电话号码'
 										},
 									}
-								},
-								touxiang : {
-
-									validators : {
-										file : {
-											extension : 'pdf,jpg,gif,png,bmp,jpeg',
-											type : 'image/pdf,image/jpg,image/gif,image/png,image/bmp,image/jpeg',
-											message : '头像不合法.'
-										}
-									}
 								}
+								
 
 							}
 
-						})
+						});
 	});
 </script>
 <style>
@@ -242,9 +234,7 @@ a {
 			<!-- 中 -->
 			<div class="container">
 				<div class="col-md-5 col-sm-10  col-xs-12 col-md-offset-4" id="fr">
-					<form name="register" action="admin"
-						method="post" enctype="multipart/form-data"
-						class="form-horizontal">
+					<form action="register" method="post" enctype="multipart/form-data" class="form-horizontal">
 						<div class="form-group">
 							<h2 class="col-sm-7 col-sm-offset-3">
 								<font color="#2D6A9C" size="7" face="楷体"><b>管理员注册</b></font>
@@ -292,7 +282,7 @@ a {
 						</div>
 						<div class="form-group">
 							<label for="phone" class="col-sm-4 control-label   "> <font
-								color="#2D6A9C"> 电话: </font>
+								color="#2D6A9C"> 手机号码: </font>
 							</label>
 							<div class="col-sm-6">
 								<input type='text' name='phone' class="form-control input-sm">

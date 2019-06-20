@@ -35,201 +35,77 @@
 
 <script type="text/javascript">
 
-	$(function() {
-
-		$("tr:even").css("background-color", "pink");
-
-		$("tr:odd").css("background-color", "lightblue");
-		
-		//事件
-		
-		$("tr").mouseover(function(){
-			
-			$(this).css("background-color", "#ff9");
-			
-		});
-		
-		$("tr").mouseout(function(){
-			
-			$("tr:even").css("background-color", "pink");
-
-			$("tr:odd").css("background-color", "lightblue");
-			
-		});
-
-	});
+$(function(){
+	   
+	$("table tr:even").addClass("info");
+	  
+	$("table tr:odd").addClass("danger");
+	
+});
 </script>
+
+<style type="text/css">
+a {
+	text-decoration: none;
+}
+</style>
 
 <title>Insert title here</title>
 
 <script type="text/javascript" src="js/ajax.js"></script>
 
-<script type="text/javascript">
-
-	window.onload = function() {
-
-		var opt = {
-
-			method : "POST",
-
-			url : "AdminServlet",
-
-			params : "action=showAdmin",
-
-			type : "json",
-
-			success : function(data) {
-
-				var admin = data;
-
-				var id = document.getElementById("id");
-
-				id.innerHTML = admin.id;
-
-				var name = document.getElementById("name");
-
-				name.innerHTML = admin.name;
-
-				var username = document.getElementById("username");
-
-				username.innerHTML = admin.username;
-
-				var password = document.getElementById("password");
-
-				password.value = admin.password;
-				
-				var phone = document.getElementById("phone");
-
-				phone.innerHTML = admin.phone;
-				
-				var touxiang=document.getElementById("touxiang");
-				
-				var img=document.createElement("img");
-				
-				img.src="/img"+admin.touxiang;
-				
-				img.width=30;
-				
-				img.height=30;
-				
-				touxiang.appendChild(img);
-			}
-		};
-
-		ajax(opt);
-
-	}
-</script>
-
 </head>
-
-<style type="text/css">
-
-.table{
-
-width:400px;
-
-}
-
-</style>
 
 <body background=".\imgs\001.jpg">
 
-	<table class="table table-striped table-hover" align="center">
+	 <caption align="center" >
+				
+				<h1 align="center">
+					
+					<font color="red" >查看管理员信息</font>
+				
+				</h1>
+				
+				<hr color="red" />
+			
+			</caption>
+		<h1 class="text-center text-danger"><span class="glyphicon glyphicon-user"></span></h1>
 
-		<h2 class="text-center text-info">管理员信息</h2>
-		
-		<tr align="center">
-
-			<td>编号</td>
-
-			<td id="id"></td>
-
-		</tr>
-
-		<tr align="center">
-
-			<td>姓名</td>
-
-			<td id="name"></td>
-
-		</tr>
-		
-		<tr align="center">
-
-			<td>头像</td>
-
-			<td id="touxiang"></td>
-
-		</tr>
-
-		<tr align="center">
-
-			<td>账号</td>
-
-			<td id="username"></td>
-
-		</tr>
-
-		<tr align="center">
-
-			<td>密码</td>
-
-			<td><input type="password" id="password" disabled="disabled" /></td>
-
-		</tr>
-
-		<tr align="center">
-
-			<td>手机</td>
-
-			<td id="phone"></td>
-
-		</tr>
-
-	<%-- 第一种方法	<tr align="center">
-
-			<td>编号</td>
-
-			<td>${admin.id }</td>
-
-		</tr>
-
-		<tr align="center">
-
-			<td>姓名</td>
-
-			<td>${admin.name }</td>
-
-		</tr>
-
-		<tr align="center">
-
-			<td>账号</td>
-
-			<td>${admin.username }</td>
-
-		</tr>
-
-		<tr align="center">
-
-			<td>密码</td>
-
-			<td><input type="password" value="${admin.password }"
-				disabled="disabled" /></td>
-
-		</tr>
-
-		<tr align="center">
-
-			<td>手机</td>
-
-			<td>${admin.phone }</td>
-
-		</tr>--%>
-
-	</table>
-
+		<table  border="1" align="center" width="500px"
+			height="300px" cellspacing="0">
+			<tr align="center">
+				<th>编号</th>
+				<th>${admin.id}</th>
+			</tr>
+			
+			<tr align="center">
+				<th>姓名</th>
+				<th>${admin.name}</th>
+			</tr>
+			
+			<tr align="center">
+				<th>头像</th>
+				<th>
+			       <img src="upload/${sessionScope.touxiang }" style="width:50px;height:50px" class="img-cicle img-responsive" />
+			    </th>
+			</tr>
+			
+			<tr align="center">
+				<th>账号</th>
+				<th>${admin.username}</th>
+			</tr>
+			
+			<tr align="center">
+				<th>密码</th>
+				<th><input type="password" value="${admin.password}" disabled="disabled"/></th>
+			</tr>
+			
+			<tr align="center">
+				<th>手机</th>
+				<th>${admin.phone}</th>
+			</tr>
+			
+		</table>
 </body>
 
 </html>

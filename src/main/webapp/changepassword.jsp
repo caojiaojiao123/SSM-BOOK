@@ -37,29 +37,13 @@
 
 <script type="text/javascript">
 
-	$(function() {
-
-		$("tr:even").css("background-color", "pink");
-
-		$("tr:odd").css("background-color", "lightblue");
-		
-		//事件
-		
-		$("tr").mouseover(function(){
-			
-			$(this).css("background-color", "#ff9");
-			
-		});
-		
-		$("tr").mouseout(function(){
-			
-			$("tr:even").css("background-color", "pink");
-
-			$("tr:odd").css("background-color", "lightblue");
-			
-		});
-
-	});
+$(function(){
+	   
+	$("table tr:even").addClass("info");
+	  
+	$("table tr:odd").addClass("danger");
+	
+});
 </script>
 
 <title>Insert title here</title>
@@ -77,222 +61,128 @@ width:400px;
 <script type="text/javascript" src="js/ajax.js"></script>
 
 <script type="text/javascript">
-
-<%--function validatepassword() {
-
-	var password = document.changepassword.password;
-
-	var xmlhttp = getXMLHttpRequest();
-
-	xmlhttp.open("POST", "AdminServlet", true);
-
-	xmlhttp.setRequestHeader("content-type",
-			"application/x-www-form-urlencoded");
-
-	xmlhttp.send("action=validatepassword&password=" + password.value);
-
-	xmlhttp.onreadystatechange = function() {
-
-		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-
-			var content = xmlhttp.responseText;
-
-			//alert(content);
-
-			var span = document.getElementById("passwordMsg");
-
-			if (content == "0") {
-
-				span.style.color = "red";
-
-				span.innerHTML = "你输入的密码和原密码不同！";
-
-				span.focus();
-
-				flag = false;
-
-			} else {
-
-				span.style.color = "green";
-
-				span.innerHTML = "密码正确，可以登录";
-
-				flag = true;
-
-			}
-
-		}
-
-	}
-
-}--%>
-
-    var flag;
-    
-    function validatepassword() {
-		
+	var flag;
+	function queryByPassword() {
 		var password = document.changepassword.password;
-		
-		var passwordMsg = document.getElementById("passwordMsg");
-
-		var opt = {
-
+		var pwMsg = document.getElementById("pwMsg");
+		ajax({
 			method : "POST",
-
-			url : "AdminServlet",
-
-			params : "action=validatepassword&password=" + password.value,
-
+			url : "queryByPassword",
+			params : "password=" + password.value,
 			type : "text",
-
 			success : function(data) {
-
-				if (data == "1") {
-
-					passwordMsg.style.color = "green";
-
-					passwordMsg.innerHTML = "密码正正确";
-
+				if (data =="0") {//找到用户名
+					pwMsg.style.color = "chartreuse";
+					pwMsg.innerHTML = "原密码输入正确!";
 					flag = true;
-
-				}else{
-					
-					passwordMsg.style.color = "red";
-
-					passwordMsg.innerHTML = "你输入的密码和原密码不同！";
-
-					passwordMsg.focus();
-
+				} else {//没找到用户名
+					pwMsg.style.color = "red";
+					pwMsg.innerHTML = "原密码输入错误，请重新输入!";
+					password.focus();
 					flag = false;
 				}
 			}
-		};
-
-		ajax(opt);
-
+		});
 	}
-
-	function validatenewpassword() {
-
-		var newpassword = document.changepassword.newpassword;
-
+	//校验新密码
+	function queryBynewPassword() {
+		
 		var password = document.changepassword.password;
-
-		var reg = /^(\w|\W){6,15}$/;
-
-		var newpasswordMsg = document.getElementById("newpasswordMsg");
-
-		if (!reg.test(newpassword.value)) {
-
-			newpasswordMsg.style.color = "red";
-
-			newpasswordMsg.innerHTML = "新密码必须是6-15的任意符号";
-
-			newpassword.focus();
-
+		
+		var newpassword = document.changepassword.newpassword;
+		
+		var reg = /^(\w|\w){6,15}$/;
+		var npwMsg = document.getElementById("npwMsg");
+		var password = document.changepassword.password;
+		if (!reg.test(newpassword.value)) {//格式不匹配
+			npwMsg.style.color = "red";
+			npwMsg.innerHTML = "新密码必须是6位以上的数字，字母，或者_!";
 			return false;
-
 		}
 		if (password.value == newpassword.value) {
-
-			newpasswordMsg.style.color = "red";
-
-			newpasswordMsg.innerHTML = "新密码不能和原密码一样";
-
-			newpassword.focus();
-
+			npwMsg.style.color = "red";
+			npwMsg.innerHTML = "新密码不能和原密码一样";
 			return false;
-
-		} else {
-
-			newpasswordMsg.style.color = "green";
-
-			newpasswordMsg.innerHTML = "新密码合法";
-
-			return true;
 		}
-
+		npwMsg.style.color = "chartreuse";
+		npwMsg.innerHTML = "新密码可用!";
+		return true;
 	}
-
-	function validaterenewpassword() {
-
-		var newpassword = document.changepassword.newpassword;
-
-		var renewpassword = document.changepassword.renewpassword;
-
-		var renewpasswordMsg = document.getElementById("renewpasswordMsg");
-
-		if (renewpassword.value == newpassword.value) {//true
-
-			renewpasswordMsg.style.color = "green";
-
-			renewpasswordMsg.innerHTML = "两次密码一致";
-
-			return true;
-
-		} else {
-
-			renewpasswordMsg.style.color = "red";
-
-			renewpasswordMsg.innerHTML = "两次密码不一致";
-
-			renewpassword.focus();
-
-			return false;
-
+	
+	//确认密码
+	function queryByrePassword() {
+		var newpassword=document.changepassword.newpassword;
+		
+		var rePassword=document.changepassword.rePassword;
+		
+		var rpwMsg=document.getElementById("rpwMsg");
+		
+		if(rePassword.value==newpassword.value){
+			
+			rpwMsg.style.color="chartreuse";
+			
+			rpwMsg.innerHTML="两次密码一致";
+			
+			flag=true;
+			
+		}else{
+			
+			rpwMsg.style.color="red";
+			
+			rpwMsg.innerHTML="抱歉两次密码不一致！";
+			
+			flag=false;
+			
 		}
-
 	}
-
 	function test() {
-
-		return flag && validatenewpassword()
-				
-		&& validaterenewpassword();
+		return queryByPassword() && queryBynewPassword() && queryByrePassword();
 	}
 </script>
 
 </head>
 
 <body background=".\imgs\001.jpg">
-
-	<form action="AdminServlet?action=changepassword" method="post"name="changepassword" onsubmit="return test()"enctype="application/x-www-form-urlencoded">
-
-		<table class="table table-striped table-hover" align="center">
-
-			<h2 class="text-center text-info">修改密码</h2>
-
-			<tr align="center">
-
-				<td>原密码：</td>
-
-				<td><input type="password" name="password"onblur="validatepassword()" /><span id="passwordMsg"></span></td>		
-
-			</tr>
-
-			<tr align="center">
-
-				<td>新密码：</td>
-
-				<td><input type="password" name="newpassword" onblur="validatenewpassword()" /><span id="newpasswordMsg"></span></td>
-
-			</tr>
-
-			<tr align="center">
-
-				<td>确认新密码：</td>
-
-				<td><input type="password" name="renewpassword" onblur="validaterenewpassword()" /><span id="renewpasswordMsg"></span></td>
-
-			</tr>
-
-			<tr align="center">
-
-				<td colspan="2"><button class="btn btn-info">确认修改</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-info">重新填写</button></td>
-
-			</tr>
-
-		</table>
+	<div class="container">
+		<h1 align="center">修改密码</h1>
+		<hr width="1000px">
+		<form name="changepassword" action="changepassword" class="form-horizontal" method="post" >
+			<div class="form-group">
+				<label for="password" class="col-sm-4 control-label">原密码</label>
+				<div class="col-sm-4">
+					<input type="password" name="password"  class="form-control" id="password" onblur=" queryByPassword()"/>
+					<span id="pwMsg"></span>
+				</div>	
+			</div>
+			
+			
+			<div class="form-group">
+				<label for="newpassword" class="col-sm-4 control-label">新密码</label>
+				<div class="col-sm-4">
+					<input type="password" name="newpassword" class="form-control" id="newpassword" onblur="queryBynewPassword()"/>
+					<span id="npwMsg"></span>
+				</div>	
+			</div>
+			
+			<div class="form-group">
+				<label for="rePassword" class="col-sm-4 control-label">确认密码</label>
+				<div class="col-sm-4">
+					<input type="password" name="rePassword" class="form-control" id="rePassword" onblur="queryByrePassword()"/>
+					<span id="rpwMsg"></span>
+				</div>	
+			</div>
+			
+			<div class="form-group">
+				<div class="col-sm-offset-4 col-sm-4">
+					<button type="submit" class="btn btn-info">点击修改</button>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="reset" class="btn btn-info">重新填写</button>
+				</div>
+			</div>
+			
+			
+		</form>
+	</div>
 </body>
 
 </html>

@@ -155,12 +155,12 @@ table {
 #div9 {
 	/* background-image: url("tu/t6.jpg"); 
 	background-size: cover;*/
-	height: 600px;
+	height: 500px;
 	margin-top: 20px;
 }
 </style>
 </head>
-<body background="image/6.jpg">
+<body background=".\imgs\001.jpg">
 
 	<div class="container-fluid" id="div9">
 		<!--  <marquee align="texttop" behavior="slide" scrollamount="60"

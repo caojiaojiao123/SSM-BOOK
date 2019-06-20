@@ -4,17 +4,15 @@ import com.oracle.web.bean.Admin;
 
 public interface AdminService {
 
-	int save(Admin admin);
+	int save(Admin admin);// 保存管理员
 
-	Admin login(Admin admin);
+	Admin login(String username);// 登录
 
-	Admin queryone(String username);
+	Admin queryone(String username);// 单查管理员
 
-	Admin showAdmin(String uname);
+	Admin selectByPrimaryKey(String username);
 
-	int updatePassword(String uname, String newpassword);
+	Admin queryByPassword(Admin admin);// 保存密码
 
-	//Admin login(String username);
-
-	Admin validate(String username);
+	Admin changepassword(String username, String newpassword);// 修改密码
 }

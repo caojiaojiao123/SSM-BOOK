@@ -341,7 +341,7 @@ window.onload=function(){
 				
 				<td>${u.username }</td>
 				
-				<td>${u.password }</td>
+				<td><input type="password" value="${u.password }"/></td>
 				
 				<td>${u.phone }</td>
 				

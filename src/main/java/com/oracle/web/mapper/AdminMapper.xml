@@ -13,7 +13,7 @@
     delete from admin
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.oracle.web.bean.Admin">
+  <insert id="save" parameterType="com.oracle.web.bean.Admin">
     insert into admin (id, name, touxiang, 
       username, password,  
       phone)
@@ -30,28 +30,39 @@
       phone = #{phone,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+ <!--  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select id, name, touxiang, username, password, phone
     from admin
     where id = #{id,jdbcType=INTEGER}
-  </select>
+  </select> -->
   <select id="selectAll" resultMap="BaseResultMap">
     select id, name, touxiang, username, password, phone
     from admin
   </select>
-  <select id="selectValidate" parameterType="String" resultType="admin">
-  	select * from admin where username = #{username}
-  </select>
-  
-  <select id="queryAdmin" parameterType="Admin" resultType="Admin">
-        select * from Admin
-        <where>
-            <if test="username != null and username != ''">
-                and username = #{username}
-            </if>
-            <if test="password != null and password != ''">
-                and password = #{password}
-            </if>
-        </where>
+  <!-- 验证用户名 -->
+	
+	<select id="queryone" parameterType="Admin" resultMap="BaseResultMap">
+		SELECT * FROM admin WHERE username=#{username,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 登录 -->
+  <select id="login" parameterType="Map" resultType="com.oracle.web.bean.Admin">
+     SELECT * FROM admin WHERE username=#{username,jdbcType=VARCHAR}
     </select>
+    
+    <!-- 修改密码 -->
+	<select id="changepassword" resultType="com.oracle.web.bean.Admin">
+		update admin set password=#{password,jdbcType=VARCHAR} where username=#{username,jdbcType=VARCHAR}
+	</select>
+
+  <!-- 查看管理员 -->
+ 	<select id="selectByPrimaryKey" parameterType="String" resultType="com.oracle.web.bean.Admin">
+     	select id, name,touxiang, username, password, phone FROM admin WHERE username=#{username,jdbcType=VARCHAR}
+    </select> 
+    
+   <!-- 验证密码 -->
+    <select id="queryByPassword" parameterType="com.oracle.web.bean.Admin" resultMap="BaseResultMap">
+		select username password from admin where username=#{username,jdbcType=VARCHAR} and password=#{password,jdbcType=VARCHAR}
+	</select>
+  
 </mapper>

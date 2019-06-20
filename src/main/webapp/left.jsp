@@ -104,11 +104,11 @@ width:250px;
 		
 		<div>
 		
-		   <li><a href="AdminServlet?action=showxinxi&username=${username }" target="right"><span class="ui-icon ui-icon-locked"></span>查看管理员</a></li>
+		   <li><a href="showAdmin" target="right"><span class="ui-icon ui-icon-locked"></span>查看管理员</a></li>
 		   
-		   <li><a href="AdminServlet?action=changepassword&username=${username }" target="right"><span class="ui-icon ui-icon-unlocked"></span>修改密码</a></li>
+		   <li><a href="changepassword.jsp" target="right"><span class="ui-icon ui-icon-unlocked"></span>修改密码</a></li>
 		   
-		   <li><a href="AdminServlet?action=exitSystem" target="_parent"><span class="ui-icon ui-icon-power"></span>退出系统</a></li>
+		   <li><a href="exitSystem" target="_parent"><span class="ui-icon ui-icon-power"></span>退出系统</a></li>
 		   	   
 		</div>
 	

@@ -176,7 +176,7 @@ margin-left: 25%;
               
 					<div class="form-group">
 					<div class="col-md-10 col-md-offset-1">
-						<button class="btn btn-primary  btn-md btn-block"  type="button" ><a href="register.jsp?"><font size="2" color="#FFFFFF"><center>立即注册</center></font></a></button>
+						<button class="btn btn-primary  btn-md btn-block"  type="button" ><a href="register.jsp"><font size="2" color="#FFFFFF"><center>立即注册</center></font></a></button>
 					</div>
 					</div>
 				</form>
@@ -192,7 +192,7 @@ margin-left: 25%;
 			</h4>
 		</center>
 		</footer>
-	</div>
+	</div> 
 </body>
 
 </html>

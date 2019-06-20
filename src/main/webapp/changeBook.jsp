@@ -180,7 +180,7 @@ hr {
 	margin-top: 20px;
 }
 </style>
-<body>
+<body background=".\imgs\001.jpg">
 
 	<div align="center"class="container-fluid" id="div9">
 		<!--  <marquee align="texttop" behavior="slide" scrollamount="60"
